@@ -84,6 +84,16 @@ void restart_root_service(int fd, void *cookie) {
             return;
         }
 
+        int root_access = android::base::GetIntProperty("persist.sys.root_access", 0);
+        std::string build_type = android::base::GetProperty("ro.build.type", "");
+
+        if (build_type != "eng" && (root_access & 2) != 2) {
+            WriteFdExactly(fd, "root access is disabled by system setting - "
+                    "enable in Settings -> System -> Development options\n");
+            adb_close(fd);
+            return;
+        }
+
         android::base::SetProperty("service.adb.root", "1");
         WriteFdExactly(fd, "restarting adbd as root\n");
         adb_close(fd);
