@@ -134,6 +134,7 @@ cc_binary {
         "sigchld_handler.cpp",
         "ueventd.cpp",
         "watchdogd.cpp",
+        "vendor_init.cpp",
     ],
     static_libs: [
         "libinit",
