@@ -136,6 +136,7 @@ cc_library_static {
         "ueventd.cpp",
         "ueventd_parser.cpp",
         "util.cpp",
+        "vendor_init.cpp",
     ],
     whole_static_libs: ["libcap", "com.android.sysprop.apex"],
     header_libs: ["bootimg_headers"],
@@ -172,7 +173,13 @@ cc_binary {
             exclude_shared_libs: ["libbinder", "libutils"],
         },
     },
-    ldflags: ["-Wl,--rpath,/system/${LIB}/bootstrap"],
+    product_variables: {
+        lineage: {
+            target_init_vendor_lib: {
+                whole_static_libs: ["%s"],
+            },
+        },
+    },
 }
 
 // Tests
