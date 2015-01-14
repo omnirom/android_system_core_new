@@ -36,6 +36,8 @@
 
 #include "fs_mgr_priv.h"
 
+#include <blkid/blkid.h>
+
 using android::base::ParseByteCount;
 using android::base::ParseInt;
 using android::base::ReadFileToString;
@@ -768,6 +770,31 @@ FstabEntry* GetEntryForMountPoint(Fstab* fstab, const std::string& path) {
     }
 
     return nullptr;
+}
+
+FstabEntry* GetEntryForMountPointTryDetectFs(Fstab* fstab, const std::string& path) {
+    if (fstab == nullptr) {
+        return nullptr;
+    }
+    FstabEntry* first_found = GetEntryForMountPoint(fstab, path);
+    if (first_found == nullptr) {
+        return nullptr;
+    }
+
+    std::string detected_fs_type;
+    char* val = blkid_get_tag_value(nullptr, "TYPE", first_found->blk_device.c_str());
+    if (val) {
+        detected_fs_type = val;
+        free(val);
+
+        for (auto& entry : *fstab) {
+            if (entry.mount_point == path && entry.fs_type == detected_fs_type) {
+                return &entry;
+            }
+        }
+    }
+
+    return first_found;
 }
 
 std::set<std::string> GetBootDevices() {
