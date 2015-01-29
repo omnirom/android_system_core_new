@@ -34,7 +34,12 @@ cc_library_static {
     name: "libfs_mgr",
     defaults: ["fs_mgr_defaults"],
     export_include_dirs: ["include"],
-    include_dirs: ["system/vold"],
+    include_dirs: [
+        "system/vold",
+        "system/extras/ext4_utils",
+        "system/extras/squashfs_utils",
+        "external/e2fsprogs/lib",
+    ],
     srcs: [
         "fs_mgr.cpp",
         "fs_mgr_dm_ioctl.cpp",
@@ -54,6 +59,8 @@ cc_library_static {
         "libselinux",
         "libavb",
         "libfstab",
+        "libext2_blkid",
+        "libext2_uuid",
     ],
     export_static_lib_headers: [
         "libfstab",
