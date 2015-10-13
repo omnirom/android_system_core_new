@@ -563,6 +563,7 @@ int Logcat::Run(int argc, char** argv) {
           { "dividers",      no_argument,       nullptr, 'D' },
           { "file",          required_argument, nullptr, 'f' },
           { "format",        required_argument, nullptr, 'v' },
+          { "color",         no_argument,       nullptr, 'C' },
           // hidden and undocumented reserved alias for --regex
           { "grep",          required_argument, nullptr, 'e' },
           // hidden and undocumented reserved alias for --max-count
@@ -586,7 +587,7 @@ int Logcat::Run(int argc, char** argv) {
         };
         // clang-format on
 
-        int c = getopt_long(argc, argv, ":cdDhLt:T:gG:sQf:r:n:v:b:BSpP:m:e:", long_options,
+        int c = getopt_long(argc, argv, ":cdDhLt:T:gG:sQf:r:n:v:b:BSpCP:m:e:", long_options,
                             &option_index);
         if (c == -1) break;
 
@@ -715,6 +716,10 @@ int Logcat::Run(int argc, char** argv) {
             case 'P':
                 setPruneList = optarg;
                 break;
+
+            case 'C':
+                setLogFormat("color");
+            break;
 
             case 'b':
                 for (const auto& buffer : Split(optarg, delimiters)) {
