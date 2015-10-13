@@ -306,6 +306,7 @@ General options:
                               comes first. Improves efficiency of polling by providing
                               an about-to-wrap wakeup.
 
+<<<<<<< HEAD   (849c34 healthd: Reinitialize mChargerNames for every battery update)
 Formatting:
   -v, --format=<format>       Sets log print format verb and adverbs, where <format> is one of:
                                 brief help long process raw tag thread threadtime time
@@ -315,6 +316,74 @@ Formatting:
                               modifiers are allowed.
   -D, --dividers              Print dividers between each log buffer.
   -B, --binary                Output the log in binary.
+=======
+    fprintf(context->error, "options include:\n"
+                    "  -s              Set default filter to silent. Equivalent to filterspec '*:S'\n"
+                    "  -f <file>, --file=<file>               Log to file. Default is stdout\n"
+                    "  -r <kbytes>, --rotate-kbytes=<kbytes>\n"
+                    "                  Rotate log every kbytes. Requires -f option\n"
+                    "  -n <count>, --rotate-count=<count>\n"
+                    "                  Sets max number of rotated logs to <count>, default 4\n"
+                    "  --id=<id>       If the signature id for logging to file changes, then clear\n"
+                    "                  the fileset and continue\n"
+                    "  -v <format>, --format=<format>\n"
+                    "                  Sets log print format verb and adverbs, where <format> is:\n"
+                    "                    brief help long process raw tag thread threadtime time\n"
+                    "                  and individually flagged modifying adverbs can be added:\n"
+                    "                    color descriptive epoch monotonic printable uid\n"
+                    "                    usec UTC year zone\n"
+                    "                  Multiple -v parameters or comma separated list of format and\n"
+                    "                  format modifiers are allowed.\n"
+                    // private and undocumented nsec, no signal, too much noise
+                    // useful for -T or -t <timestamp> accurate testing though.
+                    "  -D, --dividers  Print dividers between each log buffer\n"
+                    "  -c, --clear     Clear (flush) the entire log and exit\n"
+                    "                  if Log to File specified, clear fileset instead\n"
+                    "  -d              Dump the log and then exit (don't block)\n"
+                    "  -e <expr>, --regex=<expr>\n"
+                    "                  Only print lines where the log message matches <expr>\n"
+                    "                  where <expr> is a Perl-compatible regular expression\n"
+                    // Leave --head undocumented as alias for -m
+                    "  -m <count>, --max-count=<count>\n"
+                    "                  Quit after printing <count> lines. This is meant to be\n"
+                    "                  paired with --regex, but will work on its own.\n"
+                    "  --print         Paired with --regex and --max-count to let content bypass\n"
+                    "                  regex filter but still stop at number of matches.\n"
+                    // Leave --tail undocumented as alias for -t
+                    "  -t <count>      Print only the most recent <count> lines (implies -d)\n"
+                    "  -t '<time>'     Print most recent lines since specified time (implies -d)\n"
+                    "  -T <count>      Print only the most recent <count> lines (does not imply -d)\n"
+                    "  -T '<time>'     Print most recent lines since specified time (not imply -d)\n"
+                    "                  count is pure numerical, time is 'MM-DD hh:mm:ss.mmm...'\n"
+                    "                  'YYYY-MM-DD hh:mm:ss.mmm...' or 'sssss.mmm...' format\n"
+                    "  -g, --buffer-size                      Get the size of the ring buffer.\n"
+                    "  -G <size>, --buffer-size=<size>\n"
+                    "                  Set size of log ring buffer, may suffix with K or M.\n"
+                    "  -L, --last      Dump logs from prior to last reboot\n"
+                    "  -b <buffer>, --buffer=<buffer>         Request alternate ring buffer, 'main',\n"
+                    "                  'system', 'radio', 'events', 'crash', 'default' or 'all'.\n"
+                    "                  Additionally, 'kernel' for userdebug and eng builds, and\n"
+                    "                  'security' for Device Owner installations.\n"
+                    "                  Multiple -b parameters or comma separated list of buffers are\n"
+                    "                  allowed. Buffers interleaved. Default -b main,system,crash.\n"
+                    "  -B, --binary    Output the log in binary.\n"
+                    "  -S, --statistics                       Output statistics.\n"
+                    "  -p, --prune     Print prune white and ~black list. Service is specified as\n"
+                    "                  UID, UID/PID or /PID. Weighed for quicker pruning if prefix\n"
+                    "                  with ~, otherwise weighed for longevity if unadorned. All\n"
+                    "                  other pruning activity is oldest first. Special case ~!\n"
+                    "                  represents an automatic quicker pruning for the noisiest\n"
+                    "                  UID as determined by the current statistics.\n"
+                    "  -C              colored output\n"
+                    "  -P '<list> ...', --prune='<list> ...'\n"
+                    "                  Set prune white and ~black list, using same format as\n"
+                    "                  listed above. Must be quoted.\n"
+                    "  --pid=<pid>     Only prints logs from the given pid.\n"
+                    // Check ANDROID_LOG_WRAP_DEFAULT_TIMEOUT value for match to 2 hours
+                    "  --wrap          Sleep for 2 hours or when buffer about to wrap whichever\n"
+                    "                  comes first. Improves efficiency of polling by providing\n"
+                    "                  an about-to-wrap wakeup.\n");
+>>>>>>> CHANGE (0e2caf logcat: Map '-C' to 'logcat -v color')
 
 Outfile files:
   -f, --file=<file>           Log to file instead of stdout.
@@ -563,6 +632,7 @@ int Logcat::Run(int argc, char** argv) {
           { "dividers",      no_argument,       nullptr, 'D' },
           { "file",          required_argument, nullptr, 'f' },
           { "format",        required_argument, nullptr, 'v' },
+          { "color",         no_argument,       nullptr, 'C' },
           // hidden and undocumented reserved alias for --regex
           { "grep",          required_argument, nullptr, 'e' },
           // hidden and undocumented reserved alias for --max-count
@@ -586,7 +656,7 @@ int Logcat::Run(int argc, char** argv) {
         };
         // clang-format on
 
-        int c = getopt_long(argc, argv, ":cdDhLt:T:gG:sQf:r:n:v:b:BSpP:m:e:", long_options,
+        int c = getopt_long(argc, argv, ":cdDhLt:T:gG:sQf:r:n:v:b:BSpCP:m:e:", long_options,
                             &option_index);
         if (c == -1) break;
 
@@ -716,12 +786,31 @@ int Logcat::Run(int argc, char** argv) {
                 setPruneList = optarg;
                 break;
 
+<<<<<<< HEAD   (849c34 healthd: Reinitialize mChargerNames for every battery update)
             case 'b':
                 for (const auto& buffer : Split(optarg, delimiters)) {
                     if (buffer == "default") {
                         id_mask |= (1 << LOG_ID_MAIN) | (1 << LOG_ID_SYSTEM) | (1 << LOG_ID_CRASH);
                     } else if (buffer == "all") {
                         id_mask = -1;
+=======
+            case 'C':
+                setLogFormat(context, "color");
+            break;
+
+            case 'b': {
+                std::unique_ptr<char, void (*)(void*)> buffers(strdup(optarg), free);
+                char* arg = buffers.get();
+                unsigned idMask = 0;
+                char* sv = nullptr;  // protect against -ENOMEM above
+                while (!!(arg = strtok_r(arg, delimiters, &sv))) {
+                    if (!strcmp(arg, "default")) {
+                        idMask |= (1 << LOG_ID_MAIN) | (1 << LOG_ID_SYSTEM) |
+                                  (1 << LOG_ID_CRASH);
+                    } else if (!strcmp(arg, "all")) {
+                        allSelected = true;
+                        idMask = (unsigned)-1;
+>>>>>>> CHANGE (0e2caf logcat: Map '-C' to 'logcat -v color')
                     } else {
                         log_id_t log_id = android_name_to_log_id(buffer.c_str());
                         if (log_id >= LOG_ID_MAX) {
