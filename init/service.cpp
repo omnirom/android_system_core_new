@@ -94,11 +94,16 @@ static Result<std::string> ComputeContextFromExecutable(const std::string& servi
         free(new_con);
     }
     if (rc == 0 && computed_context == mycon.get()) {
-        return Error() << "File " << service_path << "(labeled \"" << filecon.get()
-                       << "\") has incorrect label or no domain transition from " << mycon.get()
-                       << " to another SELinux domain defined. Have you configured your "
-                          "service correctly? https://source.android.com/security/selinux/"
-                          "device-policy#label_new_services_and_address_denials";
+        std::string error = StringPrintf(
+                "File %s (labeled \"%s\") has incorrect label or no domain transition from %s to "
+                "another SELinux domain defined. Have you configured your "
+                "service correctly? https://source.android.com/security/selinux/"
+                "device-policy#label_new_services_and_address_denials",
+                service_path.c_str(), filecon.get(), mycon.get());
+        if (selinux_status_getenforce() > 0) {
+            return Error() << error;
+        }
+        LOG(ERROR) << error;
     }
     if (rc < 0) {
         return Error() << "Could not get process context";
@@ -159,9 +164,9 @@ Result<Success> Service::SetUpPidNamespace() const {
         pid_t waited_pid;
         int status;
         while ((waited_pid = wait(&status)) > 0) {
-             // This loop will end when there are no processes left inside the
-             // PID namespace or when the init process inside the PID namespace
-             // gets a signal.
+            // This loop will end when there are no processes left inside the
+            // PID namespace or when the init process inside the PID namespace
+            // gets a signal.
             if (waited_pid == child_pid) {
                 init_exitstatus = status;
             }
@@ -284,7 +289,8 @@ void Service::SetProcessAttributes() {
     for (const auto& rlimit : rlimits_) {
         if (setrlimit(rlimit.first, &rlimit.second) == -1) {
             LOG(FATAL) << StringPrintf("setrlimit(%d, {rlim_cur=%ld, rlim_max=%ld}) failed",
-                                       rlimit.first, rlimit.second.rlim_cur, rlimit.second.rlim_max);
+                                       rlimit.first, rlimit.second.rlim_cur,
+                                       rlimit.second.rlim_max);
         }
     }
     // Keep capabilites on uid change.
@@ -367,7 +373,7 @@ void Service::Reap(const siginfo_t& siginfo) {
     }
 
     // Disabled and reset processes do not get restarted automatically.
-    if (flags_ & (SVC_DISABLED | SVC_RESET))  {
+    if (flags_ & (SVC_DISABLED | SVC_RESET)) {
         NotifyStateChange("stopped");
         return;
     }
@@ -411,7 +417,7 @@ void Service::DumpState() const {
     LOG(INFO) << "  class '" << Join(classnames_, " ") << "'";
     LOG(INFO) << "  exec " << Join(args_, " ");
     std::for_each(descriptors_.begin(), descriptors_.end(),
-                  [] (const auto& info) { LOG(INFO) << *info; });
+                  [](const auto& info) { LOG(INFO) << *info; });
 }
 
 Result<Success> Service::ParseCapabilities(std::vector<std::string>&& args) {
@@ -499,7 +505,7 @@ Result<Success> Service::ParseGroup(std::vector<std::string>&& args) {
 Result<Success> Service::ParsePriority(std::vector<std::string>&& args) {
     priority_ = 0;
     if (!ParseInt(args[1], &priority_,
-                  static_cast<int>(ANDROID_PRIORITY_HIGHEST), // highest is negative
+                  static_cast<int>(ANDROID_PRIORITY_HIGHEST),  // highest is negative
                   static_cast<int>(ANDROID_PRIORITY_LOWEST))) {
         return Error() << StringPrintf("process priority value must be range %d - %d",
                                        ANDROID_PRIORITY_HIGHEST, ANDROID_PRIORITY_LOWEST);
@@ -734,9 +740,9 @@ Result<Success> Service::AddDescriptor(std::vector<std::string>&& args) {
 
     auto descriptor = std::make_unique<T>(args[1], args[2], *uid, *gid, perm, context);
 
-    auto old =
-        std::find_if(descriptors_.begin(), descriptors_.end(),
-                     [&descriptor] (const auto& other) { return descriptor.get() == other.get(); });
+    auto old = std::find_if(
+            descriptors_.begin(), descriptors_.end(),
+            [&descriptor](const auto& other) { return descriptor.get() == other.get(); });
 
     if (old != descriptors_.end()) {
         return Error() << "duplicate descriptor " << args[1] << " " << args[2];
@@ -895,7 +901,7 @@ Result<Success> Service::Start() {
     bool disabled = (flags_ & (SVC_DISABLED | SVC_RESET));
     // Starting a service removes it from the disabled or reset state and
     // immediately takes it out of the restarting state if it was in there.
-    flags_ &= (~(SVC_DISABLED|SVC_RESTARTING|SVC_RESET|SVC_RESTART|SVC_DISABLED_START));
+    flags_ &= (~(SVC_DISABLED | SVC_RESTARTING | SVC_RESET | SVC_RESTART | SVC_DISABLED_START));
 
     // Running processes require no additional work --- if they're in the
     // process of exiting, we've ensured that they will immediately restart
@@ -966,7 +972,8 @@ Result<Success> Service::Start() {
         umask(077);
 
         if (auto result = EnterNamespaces(); !result) {
-            LOG(FATAL) << "Service '" << name_ << "' could not enter namespaces: " << result.error();
+            LOG(FATAL) << "Service '" << name_
+                       << "' could not enter namespaces: " << result.error();
         }
 
 #if defined(__ANDROID__)
@@ -1038,8 +1045,8 @@ Result<Success> Service::Start() {
 
         if (ioprio_class_ != IoSchedClass_NONE) {
             if (android_set_ioprio(getpid(), ioprio_class_, ioprio_pri_)) {
-                PLOG(ERROR) << "failed to set pid " << getpid()
-                            << " ioprio=" << ioprio_class_ << "," << ioprio_pri_;
+                PLOG(ERROR) << "failed to set pid " << getpid() << " ioprio=" << ioprio_class_
+                            << "," << ioprio_pri_;
             }
         }
 
@@ -1081,7 +1088,7 @@ Result<Success> Service::Start() {
     process_cgroup_empty_ = false;
 
     bool use_memcg = swappiness_ != -1 || soft_limit_in_bytes_ != -1 || limit_in_bytes_ != -1 ||
-                      limit_percent_ != -1 || !limit_property_.empty();
+                     limit_percent_ != -1 || !limit_property_.empty();
     errno = -createProcessGroup(uid_, pid_, use_memcg);
     if (errno != 0) {
         PLOG(ERROR) << "createProcessGroup(" << uid_ << ", " << pid_ << ") failed for service '"
@@ -1271,7 +1278,8 @@ void ServiceList::AddService(std::unique_ptr<Service> service) {
     services_.emplace_back(std::move(service));
 }
 
-std::unique_ptr<Service> Service::MakeTemporaryOneshotService(const std::vector<std::string>& args) {
+std::unique_ptr<Service> Service::MakeTemporaryOneshotService(
+        const std::vector<std::string>& args) {
     // Parse the arguments: exec [SECLABEL [UID [GID]*] --] COMMAND ARGS...
     // SECLABEL can be a - to denote default
     std::size_t command_arg = 1;
@@ -1347,10 +1355,9 @@ const std::vector<Service*> ServiceList::services_in_shutdown_order() const {
 }
 
 void ServiceList::RemoveService(const Service& svc) {
-    auto svc_it = std::find_if(services_.begin(), services_.end(),
-                               [&svc] (const std::unique_ptr<Service>& s) {
-                                   return svc.name() == s->name();
-                               });
+    auto svc_it = std::find_if(
+            services_.begin(), services_.end(),
+            [&svc](const std::unique_ptr<Service>& s) { return svc.name() == s->name(); });
     if (svc_it == services_.end()) {
         return;
     }
