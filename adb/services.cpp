@@ -49,6 +49,8 @@ void service_bootstrap_func(std::string service_name, std::function<void(unique_
 
 }  // namespace
 
+bool recovery_mode = false;
+
 unique_fd create_service_thread(const char* service_name, std::function<void(unique_fd)> func) {
     int s[2];
     if (adb_socketpair(s)) {
