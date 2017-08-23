@@ -72,8 +72,20 @@ unique_fd create_service_thread(const char* service_name, std::function<void(uni
     return unique_fd(s[0]);
 }
 
+<<<<<<< HEAD   (b77548 debuggerd: add Lineage version to tombstones)
 unique_fd service_to_fd(std::string_view name, atransport* transport) {
     unique_fd ret;
+=======
+#if !ADB_HOST
+static const char* bu_path()
+{
+    return (recovery_mode ? "/sbin/bu" : "/system/bin/bu");
+}
+#endif
+
+int service_to_fd(const char* name, atransport* transport) {
+    int ret = -1;
+>>>>>>> CHANGE (ef5a7a adb: Look for executables in alternate places)
 
     if (is_socket_spec(name)) {
         std::string error;
@@ -82,7 +94,60 @@ unique_fd service_to_fd(std::string_view name, atransport* transport) {
         }
     } else {
 #if !ADB_HOST
+<<<<<<< HEAD   (b77548 debuggerd: add Lineage version to tombstones)
         ret = daemon_service_to_fd(name, transport);
+=======
+    } else if(!strncmp("dev:", name, 4)) {
+        ret = unix_open(name + 4, O_RDWR | O_CLOEXEC);
+    } else if(!strncmp(name, "framebuffer:", 12)) {
+        ret = create_service_thread("fb", framebuffer_service, nullptr);
+    } else if (!strncmp(name, "jdwp:", 5)) {
+        ret = create_jdwp_connection_fd(atoi(name+5));
+    } else if(!strncmp(name, "shell", 5)) {
+        ret = ShellService(name + 5, transport);
+    } else if(!strncmp(name, "exec:", 5)) {
+        ret = StartSubprocess(name + 5, nullptr, SubprocessType::kRaw, SubprocessProtocol::kNone);
+    } else if(!strncmp(name, "sync:", 5)) {
+        ret = create_service_thread("sync", file_sync_service, nullptr);
+    } else if(!strncmp(name, "remount:", 8)) {
+        ret = create_service_thread("remount", remount_service, nullptr);
+    } else if(!strncmp(name, "reboot:", 7)) {
+        void* arg = strdup(name + 7);
+        if (arg == NULL) return -1;
+        ret = create_service_thread("reboot", reboot_service, arg);
+        if (ret < 0) free(arg);
+    } else if(!strncmp(name, "root:", 5)) {
+        ret = create_service_thread("root", restart_root_service, nullptr);
+    } else if(!strncmp(name, "unroot:", 7)) {
+        ret = create_service_thread("unroot", restart_unroot_service, nullptr);
+    } else if(!strncmp(name, "backup:", 7)) {
+        ret = StartSubprocess(android::base::StringPrintf("%s backup %s",
+                                                          bu_path(),
+                                                          (name + 7)).c_str(),
+                              nullptr, SubprocessType::kRaw, SubprocessProtocol::kNone);
+    } else if(!strncmp(name, "restore:", 8)) {
+        ret = StartSubprocess(android::base::StringPrintf("%s restore",
+                                                         bu_path()).c_str(),
+                              nullptr, SubprocessType::kRaw, SubprocessProtocol::kNone);
+    } else if(!strncmp(name, "tcpip:", 6)) {
+        int port;
+        if (sscanf(name + 6, "%d", &port) != 1) {
+            return -1;
+        }
+        ret = create_service_thread("tcp", restart_tcp_service, reinterpret_cast<void*>(port));
+    } else if(!strncmp(name, "usb:", 4)) {
+        ret = create_service_thread("usb", restart_usb_service, nullptr);
+    } else if (!strncmp(name, "reverse:", 8)) {
+        ret = reverse_service(name + 8, transport);
+    } else if(!strncmp(name, "disable-verity:", 15)) {
+        ret = create_service_thread("verity-on", set_verity_enabled_state_service,
+                                    reinterpret_cast<void*>(0));
+    } else if(!strncmp(name, "enable-verity:", 15)) {
+        ret = create_service_thread("verity-off", set_verity_enabled_state_service,
+                                    reinterpret_cast<void*>(1));
+    } else if (!strcmp(name, "reconnect")) {
+        ret = create_service_thread("reconnect", reconnect_service, transport);
+>>>>>>> CHANGE (ef5a7a adb: Look for executables in alternate places)
 #endif
     }
 
