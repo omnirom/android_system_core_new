@@ -310,6 +310,8 @@ int main(int argc, char** argv) {
         }
     }
 
+    recovery_mode = (strcmp(adb_device_banner, "recovery") == 0);
+
     close_stdin();
 
     adb_trace_init(argv);

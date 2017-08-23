@@ -240,6 +240,12 @@ asocket* daemon_service_to_socket(std::string_view name) {
     return nullptr;
 }
 
+#if defined(__ANDROID__)
+static const char* bu_path() {
+    return recovery_mode ? "/sbin/bu" : "/system/bin/bu";
+}
+#endif
+
 unique_fd daemon_service_to_fd(std::string_view name, atransport* transport) {
 #if defined(__ANDROID__) && !defined(__ANDROID_RECOVERY__)
     if (name.starts_with("abb:") || name.starts_with("abb_exec:")) {
@@ -263,11 +269,13 @@ unique_fd daemon_service_to_fd(std::string_view name, atransport* transport) {
     } else if (name.starts_with("unroot:")) {
         return create_service_thread("unroot", restart_unroot_service);
     } else if (android::base::ConsumePrefix(&name, "backup:")) {
-        std::string cmd = "/system/bin/bu backup ";
+        std::string cmd = bu_path();
+        cmd += " backup ";
         cmd += name;
         return StartSubprocess(cmd, nullptr, SubprocessType::kRaw, SubprocessProtocol::kNone);
     } else if (name.starts_with("restore:")) {
-        return StartSubprocess("/system/bin/bu restore", nullptr, SubprocessType::kRaw,
+        return StartSubprocess(android::base::StringPrintf("%s restore", bu_path()),
+                               nullptr, SubprocessType::kRaw,
                                SubprocessProtocol::kNone);
     } else if (name.starts_with("disable-verity:")) {
         return create_service_thread("verity-on", std::bind(set_verity_enabled_state_service,
