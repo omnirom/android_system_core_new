@@ -17,6 +17,7 @@
 #define LOG_TAG "libsuspend"
 //#define LOG_NDEBUG 0
 
+#include <cutils/properties.h>
 #include <errno.h>
 #include <fcntl.h>
 #include <pthread.h>
@@ -37,6 +38,7 @@
 #define SYS_POWER_WAKEUP_COUNT "/sys/power/wakeup_count"
 
 #define BASE_SLEEP_TIME 100000
+#define POSSIBLE_MAX_SLEEP_TIME 60000000
 
 static int state_fd;
 static int wakeup_count_fd;
@@ -45,14 +47,15 @@ static sem_t suspend_lockout;
 static const char *sleep_state = "mem";
 static void (*wakeup_func)(bool success) = NULL;
 static int sleep_time = BASE_SLEEP_TIME;
+static int possible_max_sleep_time;
 
 static void update_sleep_time(bool success) {
     if (success) {
         sleep_time = BASE_SLEEP_TIME;
         return;
     }
-    // double sleep time after each failure up to one minute
-    sleep_time = MIN(sleep_time * 2, 60000000);
+    // double sleep time after each failure up to one minute by default
+    sleep_time = MIN(sleep_time * 2, possible_max_sleep_time);
 }
 
 static void *suspend_thread_func(void *arg __attribute__((unused)))
@@ -173,6 +176,12 @@ struct autosuspend_ops *autosuspend_wakeup_count_init(void)
 {
     int ret;
     char buf[80];
+
+    possible_max_sleep_time = property_get_int32(
+            "sys.autosuspend.timeout", POSSIBLE_MAX_SLEEP_TIME);
+    if (possible_max_sleep_time != POSSIBLE_MAX_SLEEP_TIME) {
+        ALOGD("autosuspend timeout is %d\n", possible_max_sleep_time);
+    }
 
     state_fd = TEMP_FAILURE_RETRY(open(SYS_POWER_STATE, O_RDWR));
     if (state_fd < 0) {
