@@ -124,3 +124,10 @@ cc_binary {
     vendor: true,
     defaults: ["grep_common"],
 }
+
+cc_binary_host {
+    name: "newfs_msdos",
+    defaults: ["toolbox_defaults"],
+    srcs: ["newfs_msdos.c"],
+    cflags: ["-Dnewfs_msdos_main=main"]
+}
