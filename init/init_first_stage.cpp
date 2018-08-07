@@ -33,11 +33,14 @@
 #include "devices.h"
 #include "fs_mgr.h"
 #include "fs_mgr_avb.h"
+#include "switch_root.h"
 #include "uevent.h"
 #include "uevent_listener.h"
 #include "util.h"
 
 using android::base::Timer;
+
+using namespace std::literals;
 
 namespace android {
 namespace init {
@@ -59,6 +62,7 @@ class FirstStageMount {
     ListenerAction HandleBlockDevice(const std::string& name, const Uevent&);
     bool InitRequiredDevices();
     bool InitVerityDevice(const std::string& verity_device);
+    bool MountPartition(fstab_rec* fstab_rec);
     bool MountPartitions();
 
     virtual ListenerAction UeventCallback(const Uevent& uevent);
@@ -279,14 +283,37 @@ bool FirstStageMount::InitVerityDevice(const std::string& verity_device) {
     return true;
 }
 
+bool FirstStageMount::MountPartition(fstab_rec* fstab_rec) {
+    if (!SetUpDmVerity(fstab_rec)) {
+        PLOG(ERROR) << "Failed to setup verity for '" << fstab_rec->mount_point << "'";
+        return false;
+    }
+    if (fs_mgr_do_mount_one(fstab_rec)) {
+        PLOG(ERROR) << "Failed to mount '" << fstab_rec->mount_point << "'";
+        return false;
+    }
+    return true;
+}
+
 bool FirstStageMount::MountPartitions() {
-    for (auto fstab_rec : mount_fstab_recs_) {
-        if (!SetUpDmVerity(fstab_rec)) {
-            PLOG(ERROR) << "Failed to setup verity for '" << fstab_rec->mount_point << "'";
+    // If system is in the fstab then we're not a system-as-root device, and in
+    // this case, we mount system first then pivot to it.  From that point on,
+    // we are effectively identical to a system-as-root device.
+    auto system_partition =
+            std::find_if(mount_fstab_recs_.begin(), mount_fstab_recs_.end(),
+                         [](const auto& rec) { return rec->mount_point == "/system"s; });
+    if (system_partition != mount_fstab_recs_.end()) {
+        if (!MountPartition(*system_partition)) {
             return false;
         }
-        if (fs_mgr_do_mount_one(fstab_rec)) {
-            PLOG(ERROR) << "Failed to mount '" << fstab_rec->mount_point << "'";
+
+        SwitchRoot("/system");
+
+        mount_fstab_recs_.erase(system_partition);
+    }
+
+    for (auto fstab_rec : mount_fstab_recs_) {
+        if (!MountPartition(fstab_rec)) {
             return false;
         }
     }

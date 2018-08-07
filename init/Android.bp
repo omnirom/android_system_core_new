@@ -118,6 +118,7 @@ cc_library_static {
         "sigchld_handler.cpp",
         "subcontext.cpp",
         "subcontext.proto",
+        "switch_root.cpp",
         "rlimit_parser.cpp",
         "tokenizer.cpp",
         "uevent_listener.cpp",
