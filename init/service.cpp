@@ -788,9 +788,11 @@ bool Service::Start() {
         }
 
         if (ioprio_class_ != IoSchedClass_NONE) {
-            if (android_set_ioprio(getpid(), ioprio_class_, ioprio_pri_)) {
-                PLOG(ERROR) << "failed to set pid " << getpid()
-                            << " ioprio=" << ioprio_class_ << "," << ioprio_pri_;
+            if (android_set_bfq_ioprio(getpid(), ioprio_class_, ioprio_pri_)) {
+                if (android_set_ioprio(getpid(), ioprio_class_, ioprio_pri_)) {
+                    PLOG(ERROR) << "failed to set pid " << getpid()
+                                << " ioprio=" << ioprio_class_ << "," << ioprio_pri_;
+                }
             }
         }
 

@@ -25,6 +25,7 @@
 #include <vector>
 
 #include <android-base/chrono_utils.h>
+#include <bfqio/bfqio.h>
 #include <cutils/iosched_policy.h>
 
 #include "action.h"
