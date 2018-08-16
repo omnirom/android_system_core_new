@@ -11,6 +11,7 @@ service zygote /system/bin/app_process64 -Xzygote /system/bin --zygote --start-s
     onrestart restart media
     onrestart restart netd
     onrestart restart wificond
+    ioprio rt 4
     writepid /dev/cpuset/foreground/tasks
 
 service zygote_secondary /system/bin/app_process32 -Xzygote /system/bin --zygote --socket-name=zygote_secondary --enable-lazy-preload
@@ -20,4 +21,5 @@ service zygote_secondary /system/bin/app_process32 -Xzygote /system/bin --zygote
     group root readproc
     socket zygote_secondary stream 660 root system
     onrestart restart zygote
+    ioprio rt 4
     writepid /dev/cpuset/foreground/tasks
