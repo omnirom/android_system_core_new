@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c0c98de7_d93a7ff2",
+        "filename": "libsuspend/autosuspend_wakeup_count.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2018-09-22T12:54:11Z",
+      "side": 1,
+      "message": "this is not true anymore",
+      "range": {
+        "startLine": 57,
+        "startChar": 44,
+        "endLine": 57,
+        "endChar": 60
+      },
+      "revId": "027e8cd7b2ea96f4739f7acb1eae3029819ae181",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
