@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "794e3055_bfcc7f7e",
+        "filename": "libsuspend/autosuspend_wakeup_count.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 2936
+      },
+      "writtenOn": "2018-09-23T01:13:41Z",
+      "side": 1,
+      "message": "Can you initialize using property_get_int32(sys.autosuspend.timeout, DEFAULT_MAX_SLEEP_TIME) here instead?",
+      "revId": "027e8cd7b2ea96f4739f7acb1eae3029819ae181",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c0c98de7_d93a7ff2",
         "filename": "libsuspend/autosuspend_wakeup_count.c",
         "patchSetId": 3
