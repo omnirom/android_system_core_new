@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a060896_f4ae374e",
+        "filename": "libsuspend/autosuspend_wakeup_count.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 2936
+      },
+      "writtenOn": "2018-09-28T03:20:36Z",
+      "side": 1,
+      "message": "Why not do the property_get inline here?\n\nstatic int possible_max_sleep_time \u003d property_get_int32(\"sys.autosuspend.timeout\", POSSIBLE_MAX_SLEEP_TIME);",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 35
+      },
+      "revId": "d3085593db90adb15b502e9735b064760c7f6b58",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
