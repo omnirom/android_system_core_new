@@ -22,6 +22,30 @@
       "revId": "d3085593db90adb15b502e9735b064760c7f6b58",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3b6419c_ff2fc2c2",
+        "filename": "libsuspend/autosuspend_wakeup_count.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 10258
+      },
+      "writtenOn": "2018-10-01T02:09:18Z",
+      "side": 1,
+      "message": "system/core/libsuspend/autosuspend_wakeup_count.c:50:38: error: initializer element is not a compile-time constant\notherwise make it non-static?",
+      "parentUuid": "1a060896_f4ae374e",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 35
+      },
+      "revId": "d3085593db90adb15b502e9735b064760c7f6b58",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
     }
   ]
 }
