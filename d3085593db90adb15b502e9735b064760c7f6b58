@@ -46,6 +46,30 @@
       "revId": "d3085593db90adb15b502e9735b064760c7f6b58",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e32edf6_53b2aa77",
+        "filename": "libsuspend/autosuspend_wakeup_count.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 2936
+      },
+      "writtenOn": "2018-10-13T19:54:41Z",
+      "side": 1,
+      "message": "oh, I see. I don\u0027t really see much of a problem with making it non static though.",
+      "parentUuid": "f3b6419c_ff2fc2c2",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 35
+      },
+      "revId": "d3085593db90adb15b502e9735b064760c7f6b58",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
     }
   ]
 }
