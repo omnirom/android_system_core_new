@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2249c1bc_800573f7",
+        "filename": "adb/Android.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 5503
+      },
+      "writtenOn": "2018-10-18T22:28:38Z",
+      "side": 1,
+      "message": "It seems adbd is the only target in this file which includes libbootloader_message, which means the other two changes above should not be necessary.  Can you confirm or deny?",
+      "revId": "feff4e11173a324a469462417ecff865928ba2ae",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
