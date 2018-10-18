@@ -16,6 +16,24 @@
       "revId": "feff4e11173a324a469462417ecff865928ba2ae",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3f648c22_cd377e14",
+        "filename": "adb/Android.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 18205
+      },
+      "writtenOn": "2018-10-18T22:53:47Z",
+      "side": 1,
+      "message": "Right. My thought process was to add the flag in all modules that included services.cpp (the source file that includes the header in question), but i didn\u0027t see it was behind the !ADB_HOST condition, so it does match with libbootloader_message only being included here.",
+      "parentUuid": "2249c1bc_800573f7",
+      "revId": "feff4e11173a324a469462417ecff865928ba2ae",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
