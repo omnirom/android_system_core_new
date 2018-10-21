@@ -94,6 +94,30 @@
       "revId": "d3085593db90adb15b502e9735b064760c7f6b58",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "351361c4_f782177c",
+        "filename": "libsuspend/autosuspend_wakeup_count.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 2936
+      },
+      "writtenOn": "2018-10-21T22:30:06Z",
+      "side": 1,
+      "message": "huh weird, I didn\u0027t remember any problem with initializing statics in C that way.",
+      "parentUuid": "48fb26fc_937a73c7",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 35
+      },
+      "revId": "d3085593db90adb15b502e9735b064760c7f6b58",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
     }
   ]
 }
