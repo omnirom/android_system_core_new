@@ -1543,9 +1543,15 @@ int fs_mgr_mount_all(Fstab* fstab, int mount_mode) {
             if (!call_vdc({"cryptfs", "mountFstab", attempted_entry.blk_device,
                            attempted_entry.mount_point},
                           nullptr)) {
-                ++error_count;
+                PERROR << android::base::StringPrintf(
+                    "Failure while mounting metadata, setting flag to needing recovery "
+                    "partition on %s at %s options: %s",
+                    fstab->recs[attempted_idx].blk_device, fstab->recs[attempted_idx].mount_point,
+                    fstab->recs[attempted_idx].fs_options);
+                encryptable = FS_MGR_MNTALL_DEV_NEEDS_RECOVERY_WIPE_PROMPT;
+            } else {
+                encryptable = FS_MGR_MNTALL_DEV_IS_METADATA_ENCRYPTED;
             }
-            encryptable = FS_MGR_MNTALL_DEV_IS_METADATA_ENCRYPTED;
             continue;
         } else {
             // fs_options might be null so we cannot use PERROR << directly.
