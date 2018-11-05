@@ -37,6 +37,7 @@
 
 #include "adb.h"
 #include "adb_io.h"
+#include "adb_utils.h"
 #include "range.h"
 #include "transport.h"
 
@@ -366,7 +367,7 @@ asocket* create_local_service_socket(const char* name, atransport* transport) {
     D("LS(%d): bound to '%s' via %d", s->id, name, fd);
 
 #if !ADB_HOST
-    if ((!strncmp(name, "root:", 5) && getuid() != 0 && __android_log_is_debuggable()) ||
+    if ((!strncmp(name, "root:", 5) && getuid() != 0 && allow_adb_root()) ||
         (!strncmp(name, "unroot:", 7) && getuid() == 0) ||
         !strncmp(name, "usb:", 4) ||
         !strncmp(name, "tcpip:", 6)) {
