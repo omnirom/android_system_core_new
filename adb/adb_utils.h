@@ -91,4 +91,8 @@ class BlockingQueue {
 
 std::string GetLogFilePath();
 
+#if !ADB_HOST
+bool allow_adb_root();
+#endif
+
 #endif

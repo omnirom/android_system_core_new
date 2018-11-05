@@ -52,7 +52,7 @@ static const char* root_seclabel = nullptr;
 
 static bool should_drop_capabilities_bounding_set() {
 #if defined(ALLOW_ADBD_ROOT)
-    if (__android_log_is_debuggable()) {
+    if (allow_adb_root()) {
         return false;
     }
 #endif
@@ -72,7 +72,7 @@ static bool should_drop_privileges() {
     // ro.secure:
     //   Drop privileges by default. Set to 1 on userdebug and user builds.
     bool ro_secure = android::base::GetBoolProperty("ro.secure", true);
-    bool ro_debuggable = __android_log_is_debuggable();
+    bool ro_debuggable = allow_adb_root();
 
     // Drop privileges if ro.secure is set...
     bool drop = ro_secure;
