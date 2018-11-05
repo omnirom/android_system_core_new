@@ -37,6 +37,11 @@
 #include "adb_trace.h"
 #include "sysdeps.h"
 
+#if !ADB_HOST
+#include <android-base/properties.h>
+#include <log/log_properties.h>
+#endif
+
 #ifdef _WIN32
 #  ifndef WIN32_LEAN_AND_MEAN
 #    define WIN32_LEAN_AND_MEAN
@@ -313,3 +318,20 @@ std::string GetLogFilePath() {
     return android::base::StringPrintf("%s/adb.%u.log", tmp_dir, getuid());
 #endif
 }
+
+#if !ADB_HOST
+bool allow_adb_root() {
+    std::string build_type = android::base::GetProperty("ro.build.type", "");
+    std::string lineage_version = android::base::GetProperty("ro.lineage.version", "");
+    std::string root_access = android::base::GetProperty("persist.sys.root_access", "0");
+
+    if (build_type == "eng") {
+        return true;
+    }
+
+    if (!lineage_version.empty() && (std::stoi(root_access) & 2) != 2) {
+        return false;
+    }
+    return __android_log_is_debuggable();
+}
+#endif
