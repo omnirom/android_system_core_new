@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c1d4a4b3_96acde15",
+        "filename": "adb/services.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2018-11-10T21:26:51Z",
+      "side": 1,
+      "message": "android:: base::GetIntProperty does the job",
+      "revId": "7ac8b0316729c8e6e87dba92338f0b72e35e9eba",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a1df980_0a6428bc",
+        "filename": "adb/services.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2018-11-10T21:26:51Z",
+      "side": 1,
+      "message": "You can remove std::stoi now",
+      "revId": "7ac8b0316729c8e6e87dba92338f0b72e35e9eba",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
