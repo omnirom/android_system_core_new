@@ -88,7 +88,7 @@ void restart_root_service(int fd, void *cookie)
             return;
         }
 
-        property_set("service.adb.root", "1");
+        property_set("cm.service.adb.root", "1");
         snprintf(buf, sizeof(buf), "restarting adbd as root\n");
         writex(fd, buf, strlen(buf));
         adb_close(fd);

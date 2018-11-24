@@ -1255,10 +1255,10 @@ static int should_drop_privileges() {
             secure = 1;
 
             // ... except we allow running as root in userdebug builds if the
-            // service.adb.root property has been set by the "adb root" command
+            // cm.service.adb.root property has been set by the "adb root" command
             property_get("ro.debuggable", value, "");
             if (strcmp(value, "1") == 0) {
-                property_get("service.adb.root", value, "");
+                property_get("cm.service.adb.root", value, "");
                 if (strcmp(value, "1") == 0) {
                     secure = 0;
                 }
