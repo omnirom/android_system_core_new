@@ -39,7 +39,7 @@ void restart_root_service(unique_fd fd) {
     }
 
     LOG(INFO) << "adbd restarting as root";
-    android::base::SetProperty("service.adb.root", "1");
+    android::base::SetProperty("lineage.service.adb.root", "1");
     WriteFdExactly(fd.get(), "restarting adbd as root\n");
 }
 
@@ -50,7 +50,7 @@ void restart_unroot_service(unique_fd fd) {
     }
 
     LOG(INFO) << "adbd restarting as nonroot";
-    android::base::SetProperty("service.adb.root", "0");
+    android::base::SetProperty("lineage.service.adb.root", "0");
     WriteFdExactly(fd.get(), "restarting adbd as non root\n");
 }
 
