@@ -20,6 +20,8 @@
 #include <fnmatch.h>
 #include <sys/sysmacros.h>
 #include <unistd.h>
+#include <fts.h>
+#include <fcntl.h>
 
 #include <memory>
 
@@ -379,11 +381,26 @@ void DeviceHandler::HandleDeviceEvent(const Uevent& uevent) {
     }
 
     // if it's not a /dev device, nothing to do
-    if (uevent.major < 0 || uevent.minor < 0) return;
+    if ((uevent.major < 0 || uevent.minor < 0) &&
+        (uevent.subsystem != "mods_interfaces"))
+            return;
 
     std::string devpath;
     std::vector<std::string> links;
     bool block = false;
+
+    /* specially handle uevent of "mods_interface" to fix race with ModManager */
+    if (uevent.subsystem == "mods_interfaces" && uevent.action == "online") {
+        std::string uevent_path = StringPrintf("%s/%s/uevent", "/sys", uevent.path.c_str());
+        int fd = open(uevent_path.c_str(), O_WRONLY);
+        if (fd >= 0) {
+            write(fd, "add\n", 4);
+            close(fd);
+            PLOG(INFO) << "sent uevent \"add\" by " << uevent_path;
+        } else
+            PLOG(ERROR) << "failed to open " << uevent_path;
+        return;
+    }
 
     if (uevent.subsystem == "block") {
         block = true;
