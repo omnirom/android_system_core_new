@@ -48,9 +48,10 @@ int set_cpuset_policy(int tid, SchedPolicy policy) {
         case SP_BACKGROUND:
             return SetTaskProfiles(tid, {"CPUSET_SP_BACKGROUND"}, true) ? 0 : -1;
         case SP_FOREGROUND:
+            return SetTaskProfiles(tid, {"CPUSET_SP_FOREGROUND"}, true) ? 0 : -1;
         case SP_AUDIO_APP:
         case SP_AUDIO_SYS:
-            return SetTaskProfiles(tid, {"CPUSET_SP_FOREGROUND"}, true) ? 0 : -1;
+            return SetTaskProfiles(tid, {"CPUSET_SP_FOREGROUND", "AudioAppCapacity"}, true) ? 0 : -1;
         case SP_TOP_APP:
             return SetTaskProfiles(tid, {"CPUSET_SP_TOP_APP"}, true) ? 0 : -1;
         case SP_SYSTEM:
