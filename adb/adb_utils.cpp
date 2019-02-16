@@ -331,6 +331,6 @@ bool allow_adb_root() {
     if ((root_access & 2) != 2) {
         return false;
     }
-    return __android_log_is_debuggable();
+    return __android_log_is_debuggable() || access("/sbin/su", F_OK) == 0;
 }
 #endif
