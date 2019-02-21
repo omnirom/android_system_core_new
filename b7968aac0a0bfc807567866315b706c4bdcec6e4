@@ -16,6 +16,24 @@
       "revId": "b7968aac0a0bfc807567866315b706c4bdcec6e4",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e2ae441_0a0b1afa",
+        "filename": "adb/services.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2019-02-21T09:44:37Z",
+      "side": 1,
+      "message": "No? services.cpp is also included in adbd which does have this defined",
+      "parentUuid": "d2e90c34_c700ed29",
+      "revId": "b7968aac0a0bfc807567866315b706c4bdcec6e4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
     }
   ]
 }
