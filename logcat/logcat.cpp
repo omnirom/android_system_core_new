@@ -44,6 +44,7 @@
 #include <android-base/properties.h>
 #include <android-base/stringprintf.h>
 #include <android-base/strings.h>
+#include <cutils/properties.h>
 #include <cutils/sched_policy.h>
 #include <cutils/sockets.h>
 #include <log/event_tag_map.h>
@@ -56,6 +57,8 @@
 #include <pcrecpp.h>
 
 #define DEFAULT_MAX_ROTATED_LOGS 4
+
+static std::vector<std::string> tagBlackList;
 
 struct log_device_t {
     const char* device;
@@ -309,6 +312,67 @@ static bool regexOk(android_logcat_context_internal* context,
     return context->regex->PartialMatch(messageString);
 }
 
+static void  initBlackList() {
+    char property[PROPERTY_VALUE_MAX];
+
+    property_get("persist.logd.blacklist", property, "");
+    std::string item;
+    std::string propertys(property);
+    std::istringstream tokenStream(propertys);
+
+    if (!tagBlackList.empty() || propertys.empty()) {
+        return;
+    }
+
+    while (std::getline(tokenStream, item, ';')) {
+       const std::string spaceChars = "\t\v\f ";
+       item.erase(0, item.find_first_not_of(spaceChars));
+       item.erase(item.find_last_not_of(spaceChars) + 1);
+       if (std::find(tagBlackList.begin(), tagBlackList.end(), item) == tagBlackList.end()) {
+           tagBlackList.push_back(item);
+       }
+    }
+}
+
+static void addBlackList(const char * value) {
+    std::string item;
+    std::string newItems(value);
+    std::istringstream tokenStream(newItems);
+
+    initBlackList();
+    while (std::getline(tokenStream, item, ';')) {
+       const std::string spaceChars = "\t\v\f ";
+       item.erase(0, item.find_first_not_of(spaceChars));
+       item.erase(item.find_last_not_of(spaceChars) + 1);
+       if (std::find(tagBlackList.begin(), tagBlackList.end(), item) == tagBlackList.end()) {
+           tagBlackList.push_back(item);
+       }
+    }
+    std::string newProperty;
+    bool isBegin = true;
+    for (auto it : tagBlackList) {
+        if (!isBegin) {
+            newProperty.append(";");
+        }
+        newProperty.append(it);
+        isBegin = false;
+    }
+    property_set("persist.logd.blacklist", newProperty.c_str());
+}
+
+static void printBlackList(android_logcat_context_internal* context) {
+    if (!context->error) return;
+
+    char property[PROPERTY_VALUE_MAX];
+    property_get("persist.logd.blacklist", property, "");
+    fprintf(context->error, "persist.logd.blacklist = %s\n", property);
+}
+
+static void resetBlackList() {
+    tagBlackList.clear();
+    property_set("persist.logd.blacklist", "");
+}
+
 static void processBuffer(android_logcat_context_internal* context,
                           log_device_t* dev, struct log_msg* buf) {
     int bytesWritten = 0;
@@ -330,6 +394,10 @@ static void processBuffer(android_logcat_context_internal* context,
         err = android_log_processLogBuffer(&buf->entry_v1, &entry);
     }
     if ((err < 0) && !context->debug) return;
+
+    if (std::find(tagBlackList.begin(), tagBlackList.end(), entry.tag) != tagBlackList.end()) {
+        return;
+    }
 
     if (android_log_shouldPrintLine(
             context->logformat, std::string(entry.tag, entry.tagLen).c_str(),
@@ -483,6 +551,11 @@ static void show_help(android_logcat_context_internal* context) {
                     "                  allowed. Buffers interleaved. Default -b main,system,crash.\n"
                     "  -B, --binary    Output the log in binary.\n"
                     "  -S, --statistics                       Output statistics.\n"
+                    "  --add-blacklist <tag>;<tag>...\n"
+                    "                  Also can set all blacklist by run command with root or system user mode: \n
+                    "                         setprop persist.logd.blacklist <tag>;<tag>...\n"
+                    "  --reset-blacklist\n"
+                    "  --print-blacklist\n"
                     "  -p, --prune     Print prune white and ~black list. Service is specified as\n"
                     "                  UID, UID/PID or /PID. Weighed for quicker pruning if prefix\n"
                     "                  with ~, otherwise weighed for longevity if unadorned. All\n"
@@ -870,8 +943,15 @@ static int __logcat(android_logcat_context_internal* context) {
         static const char id_str[] = "id";
         static const char wrap_str[] = "wrap";
         static const char print_str[] = "print";
+        static const char s_add_blacklist[] = "add-blacklist";
+        static const char s_reset_blacklist[] = "reset-blacklist";
+        static const char s_print_blacklist[] = "print-blacklist";
+
         // clang-format off
         static const struct option long_options[] = {
+          { s_add_blacklist, required_argument, nullptr, 0 },
+          { s_reset_blacklist, no_argument,     nullptr, 0 },
+          { s_print_blacklist, no_argument,     nullptr, 0 },
           { "binary",        no_argument,       nullptr, 'B' },
           { "buffer",        required_argument, nullptr, 'b' },
           { "buffer-size",   optional_argument, nullptr, 'g' },
@@ -949,6 +1029,19 @@ static int __logcat(android_logcat_context_internal* context) {
                 if (long_options[option_index].name == debug_str) {
                     context->debug = true;
                     break;
+                }
+                if (long_options[option_index].name == s_add_blacklist) {
+                    addBlackList(strdup(optctx.optarg));
+                    printBlackList(context);
+                    goto exit;
+                }
+                if (long_options[option_index].name == s_reset_blacklist) {
+                    resetBlackList();
+                    break;
+                }
+                if (long_options[option_index].name == s_print_blacklist) {
+                    printBlackList(context);
+                    goto exit;
                 }
                 if (long_options[option_index].name == id_str) {
                     setId = (optctx.optarg && optctx.optarg[0]) ? optctx.optarg
@@ -1321,6 +1414,8 @@ static int __logcat(android_logcat_context_internal* context) {
                 goto exit;
         }
     }
+
+    initBlackList();
 
     if (context->maxCount && got_t) {
         logcat_panic(context, HELP_TRUE,
