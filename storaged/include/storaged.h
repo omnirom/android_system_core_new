@@ -73,6 +73,7 @@ struct storaged_config {
     int periodic_chores_interval_disk_stats_publish;
     int periodic_chores_interval_uid_io;
     int periodic_chores_interval_flush_proto;
+    int dsm_stats_enabled;
     int event_time_check_usec;  // check how much cputime spent in event loop
 };
 

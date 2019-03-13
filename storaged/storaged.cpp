@@ -158,6 +158,9 @@ storaged_t::storaged_t(void) {
         property_get_int32("ro.storaged.flush_proto.interval",
                            DEFAULT_PERIODIC_CHORES_INTERVAL_FLUSH_PROTO);
 
+    mConfig.dsm_stats_enabled =
+        property_get_int32("ro.storaged.dsm.stats.enabled", 1);
+
     mStarttime = time(NULL);
     mTimer = 0;
 }
@@ -311,7 +314,7 @@ void storaged_t::flush_protos(unordered_map<int, StoragedProto>* protos) {
 void storaged_t::event(void) {
     unordered_map<int, StoragedProto> protos;
 
-    if (mDsm->enabled()) {
+    if (mDsm->enabled() && mConfig.dsm_stats_enabled) {
         mDsm->update();
         if (!(mTimer % mConfig.periodic_chores_interval_disk_stats_publish)) {
             mDsm->publish();
