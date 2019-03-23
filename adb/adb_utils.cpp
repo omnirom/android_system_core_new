@@ -328,6 +328,10 @@ bool allow_adb_root() {
         return true;
     }
 
+    if (build_type == "userdebug" && (strcmp(adb_device_banner, "recovery") == 0)) {
+        return true;
+    }
+
     if ((root_access & 2) != 2) {
         return false;
     }
