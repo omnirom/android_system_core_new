@@ -1009,6 +1009,7 @@ static Result<Success> do_restorecon(const BuiltinArguments& args) {
     static const flag_type flags[] = {
         {"--recursive", SELINUX_ANDROID_RESTORECON_RECURSE},
         {"--skip-ce", SELINUX_ANDROID_RESTORECON_SKIPCE},
+        {"--force", SELINUX_ANDROID_RESTORECON_FORCE},
         {"--cross-filesystems", SELINUX_ANDROID_RESTORECON_CROSS_FILESYSTEMS},
         {0, 0}
     };
