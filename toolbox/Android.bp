@@ -124,3 +124,9 @@ cc_binary {
     vendor: true,
     defaults: ["grep_common"],
 }
+
+cc_library {
+    name: "libnewfs_msdos",
+    defaults: ["toolbox_defaults"],
+    srcs: ["newfs_msdos.c"],
+}
