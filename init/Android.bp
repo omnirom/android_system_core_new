@@ -52,6 +52,7 @@ cc_defaults {
             cppflags: [
                 "-USHUTDOWN_ZERO_TIMEOUT",
                 "-DSHUTDOWN_ZERO_TIMEOUT=1",
+                "-DREBOOT_RECOVERY_ON_PANIC=1",
             ],
         },
         uml: {

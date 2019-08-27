@@ -478,7 +478,11 @@ static void InstallRebootSignalHandlers() {
         // RebootSystem uses syscall() which isn't actually async-signal-safe, but our only option
         // and probably good enough given this is already an error case and only enabled for
         // development builds.
+#ifdef REBOOT_RECOVERY_ON_PANIC
+        RebootSystem(ANDROID_RB_RESTART2, "recovery");
+#else
         RebootSystem(ANDROID_RB_RESTART2, "bootloader");
+#endif // REBOOT_RECOVERY_ON_PANIC
     };
     action.sa_flags = SA_RESTART;
     sigaction(SIGABRT, &action, nullptr);
