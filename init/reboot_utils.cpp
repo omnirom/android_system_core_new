@@ -33,7 +33,11 @@
 namespace android {
 namespace init {
 
+#ifdef REBOOT_RECOVERY_ON_PANIC
+static std::string init_fatal_reboot_target = "recovery";
+#else
 static std::string init_fatal_reboot_target = "bootloader";
+#endif
 
 void SetFatalRebootTarget() {
     std::string cmdline;
