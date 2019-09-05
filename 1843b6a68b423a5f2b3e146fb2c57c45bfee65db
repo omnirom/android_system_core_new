@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "99581602_d46d5417",
+        "filename": "init/service.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 10258
+      },
+      "writtenOn": "2019-09-05T09:54:19Z",
+      "side": 1,
+      "message": "Does it compile w/o this?",
+      "range": {
+        "startLine": 106,
+        "startChar": 36,
+        "endLine": 106,
+        "endChar": 42
+      },
+      "revId": "1843b6a68b423a5f2b3e146fb2c57c45bfee65db",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
