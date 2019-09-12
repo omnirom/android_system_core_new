@@ -886,12 +886,22 @@ bool DoFirstStageMount(bool create_devices) {
         LOG(ERROR) << "Failed to create FirstStageMount " << fsm.error();
         return false;
     }
+<<<<<<< HEAD   (25d115 Add wrapped key support)
 
     if (create_devices) {
         if (!(*fsm)->DoCreateDevices()) return false;
     }
 
     return (*fsm)->DoFirstStageMount();
+=======
+    if(!handle->DoFirstStageMount()) {
+	    handle = nullptr;
+	    auto fstab = ReadFirstStageFstab();
+	    std::unique_ptr<FirstStageMount> v = std::make_unique<FirstStageMountVBootV1>(std::move(fstab));
+	    return v->DoFirstStageMount();
+    }
+    return true;
+>>>>>>> CHANGE (a3f715 [first stage] If Vboot2 fails, fall-back to Vboot1)
 }
 
 void SetInitAvbVersionInRecovery() {
