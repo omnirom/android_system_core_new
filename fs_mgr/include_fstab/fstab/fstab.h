@@ -82,7 +82,11 @@ struct FstabEntry {
         bool first_stage_mount : 1;
         bool slot_select_other : 1;
         bool fs_verity : 1;
+<<<<<<< HEAD   (6072de Snap for 6680390 from add3b3a137cdf32852352c1426cbfaa4707dd6)
         bool ext_meta_csum : 1;
+=======
+        bool wrapped_key : 1;
+>>>>>>> CHANGE (9f0301 Add wrapped key support)
     } fs_mgr_flags = {};
 
     bool is_encryptable() const {

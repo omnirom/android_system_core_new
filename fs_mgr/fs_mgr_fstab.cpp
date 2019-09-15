@@ -177,7 +177,11 @@ void ParseFsMgrFlags(const std::string& flags, FstabEntry* entry) {
         CheckFlag("first_stage_mount", first_stage_mount);
         CheckFlag("slotselect_other", slot_select_other);
         CheckFlag("fsverity", fs_verity);
+<<<<<<< HEAD   (6072de Snap for 6680390 from add3b3a137cdf32852352c1426cbfaa4707dd6)
         CheckFlag("metadata_csum", ext_meta_csum);
+=======
+        CheckFlag("wrappedkey", wrapped_key);
+>>>>>>> CHANGE (9f0301 Add wrapped key support)
 
 #undef CheckFlag
 
