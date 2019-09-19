@@ -83,6 +83,8 @@
 #define PROC_STATUS_TGID_FIELD "Tgid:"
 #define LINE_MAX 128
 
+#define PERCEPTIBLE_APP_ADJ 200
+
 /* Android Logger event logtags (see event.logtags) */
 #define MEMINFO_LOG_TAG 10195355
 
@@ -2017,6 +2019,8 @@ static void mp_event_psi(int data, uint32_t events, struct polling_params *poll_
     bool cycle_after_kill = false;
     enum reclaim_state reclaim = NO_RECLAIM;
     enum zone_watermark wmark = WMARK_NONE;
+    bool cut_thrashing_limit = false;
+    int min_score_adj = 0;
 
     /* Skip while still killing a process */
     if (is_kill_pending()) {
@@ -2115,23 +2119,32 @@ static void mp_event_psi(int data, uint32_t events, struct polling_params *poll_
         /* Both free memory and swap are low */
         kill_reason = LOW_MEM_AND_SWAP;
     } else if (wmark < WMARK_HIGH && thrashing > thrashing_limit) {
-        /*
-         * Record last time system was thrashing and cut thrasing limit by
-         * thrashing_limit_decay_pct percentage of the current thrashing amount
-         * until the system stops thrashing
-         */
-        thrashing_limit = (thrashing_limit * (100 - thrashing_limit_decay_pct)) / 100;
+        /* Page cache is thrashing while low on memory */
         kill_reason = LOW_MEM_AND_THRASHING;
+        cut_thrashing_limit = true;
+        /* Do not kill perceptible apps because of thrashing */
+        min_score_adj = PERCEPTIBLE_APP_ADJ;
     } else if (reclaim == DIRECT_RECLAIM && thrashing > thrashing_limit) {
         /* Page cache is thrashing while in direct reclaim (mostly happens on lowram devices) */
-        thrashing_limit = (thrashing_limit * (100 - thrashing_limit_decay_pct)) / 100;
         kill_reason = DIRECT_RECL_AND_THRASHING;
+        cut_thrashing_limit = true;
+        /* Do not kill perceptible apps because of thrashing */
+        min_score_adj = PERCEPTIBLE_APP_ADJ;
     }
 
     /* Kill a process if necessary */
     if (kill_reason != NONE) {
-        int pages_freed = find_and_kill_process(0);
-        killing = (pages_freed > 0);
+        int pages_freed = find_and_kill_process(min_score_adj);
+        if (pages_freed > 0) {
+            killing = true;
+            if (cut_thrashing_limit) {
+                /*
+                 * Cut thrasing limit by thrashing_limit_decay_pct percentage of the current
+                 * thrashing limit until the system stops thrashing.
+                 */
+                thrashing_limit = (thrashing_limit * (100 - thrashing_limit_decay_pct)) / 100;
+            }
+        }
         meminfo_log(&mi);
     }
 
