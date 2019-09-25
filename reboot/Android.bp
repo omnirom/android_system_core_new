@@ -6,3 +6,10 @@ cc_binary {
     shared_libs: ["libcutils"],
     cflags: ["-Werror"],
 }
+
+cc_library_static {
+    name: "libreboot",
+    recovery_available: true,
+    srcs: ["reboot.c"],
+    cflags: ["-Dmain=reboot_main"],
+}
