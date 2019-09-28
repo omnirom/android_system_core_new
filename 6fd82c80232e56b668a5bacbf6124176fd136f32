@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cfd373ea_475fab21",
+        "filename": "mkbootimg/unpack_bootimg.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2019-09-28T18:27:51Z",
+      "side": 1,
+      "message": "use // instead ( AOSP guideline )",
+      "revId": "6fd82c80232e56b668a5bacbf6124176fd136f32",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
