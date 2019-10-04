@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "84f6fcda_5730927f",
+        "filename": "logcat/logcat.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 871,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2019-10-04T21:54:45Z",
+      "side": 1,
+      "message": "nullptr?",
+      "range": {
+        "startLine": 871,
+        "startChar": 48,
+        "endLine": 871,
+        "endChar": 52
+      },
+      "revId": "e1212fc74a32c3992780537ca8af5c163f29fb6f",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
