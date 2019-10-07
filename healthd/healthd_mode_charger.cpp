@@ -74,7 +74,6 @@ char* locale;
 #define UNPLUGGED_SHUTDOWN_TIME (10 * MSEC_PER_SEC)
 
 #define LAST_KMSG_MAX_SZ (32 * 1024)
-#define BACKLIGHT_TOGGLE_PATH "/sys/class/backlight/panel0-backlight/brightness"
 
 #define LOGE(x...) KLOG_ERROR("charger", x);
 #define LOGW(x...) KLOG_WARNING("charger", x);

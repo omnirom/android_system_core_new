@@ -35,6 +35,11 @@ endif
 ifeq ($(strip $(BOARD_CHARGER_ENABLE_SUSPEND)),true)
 LOCAL_CFLAGS += -DCHARGER_ENABLE_SUSPEND
 endif
+ifneq ($(strip $(BACKLIGHT_PATH)),)
+LOCAL_CFLAGS += -DBACKLIGHT_TOGGLE_PATH=\"$(BACKLIGHT_PATH)\"
+else
+LOCAL_CFLAGS += -DBACKLIGHT_TOGGLE_PATH=\"/sys/class/backlight/panel0-backlight/brightness\"
+endif
 
 LOCAL_SRC_FILES := \
     healthd_mode_charger.cpp \
