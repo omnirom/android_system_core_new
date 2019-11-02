@@ -1,0 +1,4 @@
+service adb_root /system/bin/adb_root
+    class main
+    user root
+    group root
