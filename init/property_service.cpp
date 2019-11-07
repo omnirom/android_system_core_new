@@ -1033,6 +1033,9 @@ static void HandleInitSocket() {
                 InitPropertySet(persistent_property_record.name(),
                                 persistent_property_record.value());
             }
+            // Load vendor persistent properties
+            vendor_load_persist_properties();
+
             InitPropertySet("ro.persistent_properties.ready", "true");
             persistent_properties_loaded = true;
             break;
