@@ -1,7 +1,7 @@
 service adb_root /system/bin/adb_root
-    class main
+    class late_start
     user root
     group root
 
-on boot
+on post-fs-data
     mkdir /data/adbroot 0700 root root
