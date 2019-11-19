@@ -72,7 +72,6 @@
 #include "service.h"
 #include "subcontext.h"
 #include "util.h"
-#include "vendor_init.h"
 
 using namespace std::literals::string_literals;
 
@@ -1059,11 +1058,6 @@ static Result<Success> do_load_system_props(const BuiltinArguments& args) {
     return Success();
 }
 
-static Result<Success> do_vendor_load_properties(const BuiltinArguments& args) {
-    vendor_load_properties();
-    return Success();
-}
-
 static Result<Success> do_wait(const BuiltinArguments& args) {
     auto timeout = kCommandRetryTimeout;
     if (args.size() == 3) {
@@ -1227,7 +1221,6 @@ const BuiltinFunctionMap::Map& BuiltinFunctionMap::map() const {
         {"interface_stop",          {1,     1,    {false,  do_interface_stop}}},
         {"load_persist_props",      {0,     0,    {false,  do_load_persist_props}}},
         {"load_system_props",       {0,     0,    {false,  do_load_system_props}}},
-        {"vendor_load_properties",  {0,     0,    {false,  do_vendor_load_properties}}},
         {"loglevel",                {1,     1,    {false,  do_loglevel}}},
         {"mark_post_data",          {0,     0,    {false,  do_mark_post_data}}},
         {"mkdir",                   {1,     4,    {true,   do_mkdir}}},
