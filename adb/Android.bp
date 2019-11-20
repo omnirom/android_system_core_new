@@ -517,24 +517,6 @@ cc_binary {
 }
 
 cc_binary {
-    name: "adb_root",
-    srcs: [
-        "root/adbroot_service.cpp",
-        "root/main.cpp",
-    ],
-    init_rc: [
-        "root/adb_root.rc",
-    ],
-    shared_libs: [
-        "adbroot_aidl_interface-cpp",
-        "libbase",
-        "libbinder",
-        "liblog",
-        "libutils",
-    ]
-}
-
-cc_binary {
     name: "abb",
 
     defaults: ["adbd_defaults"],
@@ -632,24 +614,4 @@ python_test_host {
             enabled: false,
         },
     },
-}
-
-aidl_interface {
-    name: "adbroot_aidl_interface",
-    srcs: [
-        "aidl/android/adbroot/IADBRootService.aidl",
-    ],
-    local_include_dir: "aidl",
-    backend: {
-        ndk: {
-            enabled: false,
-        },
-    },
-}
-
-filegroup {
-    name: "adbrootservice_aidl",
-    srcs: [
-        "aidl/android/adbroot/IADBRootService.aidl",
-    ],
 }
