@@ -415,7 +415,6 @@ cc_library {
     target: {
         android: {
             srcs: [
-                ":adbrootservice_aidl",
                 "daemon/abb_service.cpp",
                 "daemon/framebuffer_service.cpp",
                 "daemon/mdns.cpp",
@@ -429,6 +428,7 @@ cc_library {
             ],
             static_libs: [
                 "libavb_user",
+                "adbroot_aidl_interface-cpp",
             ],
             shared_libs: [
                 "libbinder",
@@ -443,8 +443,10 @@ cc_library {
         },
         recovery: {
             exclude_srcs: [
-                ":adbrootservice_aidl",
                 "daemon/abb_service.cpp",
+            ],
+            exclude_static_libs: [
+                "adbroot_aidl_interface-cpp",
             ],
             exclude_shared_libs: [
                 "libbinder",

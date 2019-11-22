@@ -26,8 +26,8 @@
 #include <log/log_properties.h>
 
 #if defined(__ANDROID__) && !defined(__ANDROID_RECOVERY__)
-#include <android/adbroot/IADBRootService.h>
 #include <binder/IServiceManager.h>
+#include <lineageos/system/IAdbRootService.h>
 #include <utils/String16.h>
 #endif
 
@@ -41,15 +41,11 @@ void restart_root_service(unique_fd fd) {
     }
 
 #if defined(__ANDROID__) && !defined(__ANDROID_RECOVERY__)
-    android::sp<android::IBinder> binder =
-            android::defaultServiceManager()->getService(android::String16("adbroot_service"));
-    if (!binder) {
-        LOG(ERROR) << "Failed to get service: adbroot_service";
-        return;
-    }
+    using lineageos::system::IAdbRootService;
 
-    android::sp<android::adbroot::IADBRootService> service =
-            android::adbroot::IADBRootService::asInterface(binder);
+    android::sp<IAdbRootService> service = android::interface_cast<IAdbRootService>(
+            android::defaultServiceManager()->getService(
+                android::String16("lineageadbroot")));
     if (!service) {
         LOG(ERROR) << "Failed to get adbroot_service interface";
         return;
@@ -57,7 +53,7 @@ void restart_root_service(unique_fd fd) {
 #endif
 
 #if defined(__ANDROID__) && !defined(__ANDROID_RECOVERY__)
-    bool enabled;
+    bool enabled = false;
     if (auto status = service->getEnabled(&enabled); !status.isOk()) {
 #endif
     if (!__android_log_is_debuggable()) {
