@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fc9efca8_cc1b1620",
+        "filename": "adb/root/adbroot_service.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 2936
+      },
+      "writtenOn": "2019-12-01T03:15:42Z",
+      "side": 1,
+      "message": "Why was this changed? There shouldn\u0027t have been any issue with fully qualifying these.",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 30
+      },
+      "revId": "2b525c22dbd9e91be2117b0b2b1ccb4d6cffa2c5",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
