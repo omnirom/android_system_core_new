@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f4278982_c89878ce",
+        "filename": "adb/root/adbroot_service.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 2936
+      },
+      "writtenOn": "2019-12-01T03:11:06Z",
+      "side": 1,
+      "message": "Just wondering, why not the STL std::mutex and std::lock_guard?",
+      "range": {
+        "startLine": 37,
+        "startChar": 4,
+        "endLine": 37,
+        "endChar": 9
+      },
+      "revId": "43ab18e634b736b512ae1337597470a9849eb5ad",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
