@@ -18,6 +18,7 @@
 
 #include <chrono>
 #include <string>
+#include <vector>
 
 #ifdef HOST_TEST
 #include <base/logging.h>
@@ -59,6 +60,9 @@ bool WaitForFile(const std::string& filename, const std::chrono::milliseconds re
 bool IsDeviceUnlocked();
 
 bool SetBlockDeviceReadOnly(const std::string& blockdev);
+
+// Returns a list of file under the dir, no order is guaranteed.
+std::vector<std::string> ListFiles(const std::string& dir);
 
 }  // namespace fs_mgr
 }  // namespace android
