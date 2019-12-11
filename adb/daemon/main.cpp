@@ -45,6 +45,12 @@
 
 #include <private/android_filesystem_config.h>
 #include "selinux/android.h"
+
+#if !defined(__ANDROID_RECOVERY__)
+#include <android/adbroot/IADBRootService.h>
+#include <binder/IServiceManager.h>
+#include <utils/String16.h>
+#endif
 #endif
 
 #include "adb.h"
@@ -73,6 +79,7 @@ static bool should_drop_capabilities_bounding_set() {
 
 static bool should_drop_privileges() {
     // "adb root" not allowed, always drop privileges.
+#if defined(__ANDROID_RECOVERY__)
     if (!ALLOW_ADBD_ROOT && !is_device_unlocked()) return true;
 
     // The properties that affect `adb root` and `adb unroot` are ro.secure and
@@ -83,19 +90,41 @@ static bool should_drop_privileges() {
     //   Allowed to become root, but not necessarily the default. Set to 1 on
     //   eng and userdebug builds.
     //
-    // ro.secure:
-    //   Drop privileges by default. Set to 1 on userdebug and user builds.
-    bool ro_secure = android::base::GetBoolProperty("ro.secure", true);
     bool ro_debuggable = __android_log_is_debuggable();
+#else
+    android::sp<android::IBinder> binder =
+            android::defaultServiceManager()->getService(android::String16("adbroot_service"));
+    if (!binder) {
+        LOG(ERROR) << "Failed to get service: adbroot_service";
+        return true;
+    }
+
+    android::sp<android::adbroot::IADBRootService> service =
+            android::adbroot::IADBRootService::asInterface(binder);
+    if (!service) {
+        LOG(ERROR) << "Failed to get adbroot_service interface";
+        return true;
+    }
+
+    bool adbroot_enabled = false;
+    if (auto status = service->getEnabled(&adbroot_enabled); !status.isOk() || !ALLOW_ADBD_ROOT) {
+        return true;
+    }
+#endif
 
     // Drop privileges if ro.secure is set...
+    bool ro_secure = android::base::GetBoolProperty("ro.secure", true);
     bool drop = ro_secure;
 
     // ... except "adb root" lets you keep privileges in a debuggable build.
     std::string prop = android::base::GetProperty("lineage.service.adb.root", "");
     bool adb_root = (prop == "1");
     bool adb_unroot = (prop == "0");
+#if defined(__ANDROID_RECOVERY__)
     if (ro_debuggable && adb_root) {
+#else
+    if (adbroot_enabled && adb_root) {
+#endif
         drop = false;
     }
     // ... and "adb unroot" lets you explicitly drop privileges.
