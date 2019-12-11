@@ -45,6 +45,12 @@
 
 #include <private/android_filesystem_config.h>
 #include "selinux/android.h"
+
+#if !defined(__ANDROID_RECOVERY__)
+#include <android/adbroot/IADBRootService.h>
+#include <binder/IServiceManager.h>
+#include <utils/String16.h>
+#endif
 #endif
 
 #include "adb.h"
@@ -73,8 +79,12 @@ static bool should_drop_capabilities_bounding_set() {
 
 static bool should_drop_privileges() {
     // "adb root" not allowed, always drop privileges.
-    if (!ALLOW_ADBD_ROOT && !is_device_unlocked()) return true;
+    if (!ALLOW_ADBD_ROOT) return true;
+#if defined(__ANDROID_RECOVERY__)
+    if (!is_device_unlocked()) return true;
+#endif
 
+#if defined(__ANDROID_RECOVERY__)
     // The properties that affect `adb root` and `adb unroot` are ro.secure and
     // ro.debuggable. In this context the names don't make the expected behavior
     // particularly obvious.
@@ -90,12 +100,37 @@ static bool should_drop_privileges() {
 
     // Drop privileges if ro.secure is set...
     bool drop = ro_secure;
+#else
+    android::sp<android::IBinder> binder =
+            android::defaultServiceManager()->getService(android::String16("adbroot_service"));
+    if (!binder) {
+        LOG(ERROR) << "Failed to get service: adbroot_service";
+        return true;
+    }
+
+    android::sp<android::adbroot::IADBRootService> service =
+            android::adbroot::IADBRootService::asInterface(binder);
+    if (!service) {
+        LOG(ERROR) << "Failed to get adbroot_service interface";
+        return true;
+    }
+
+    bool enabled = false;
+    if (auto status = service->getEnabled(&enabled); !status.isOk()) {
+        return true;
+    }
+    bool drop = !enabled;
+#endif
 
     // ... except "adb root" lets you keep privileges in a debuggable build.
     std::string prop = android::base::GetProperty("lineage.service.adb.root", "");
     bool adb_root = (prop == "1");
     bool adb_unroot = (prop == "0");
+#if defined(__ANDROID_RECOVERY__)
     if (ro_debuggable && adb_root) {
+#else
+    if (adb_root) {
+#endif
         drop = false;
     }
     // ... and "adb unroot" lets you explicitly drop privileges.
