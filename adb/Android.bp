@@ -87,6 +87,29 @@ cc_defaults {
             ],
         },
     },
+    target: {
+        android: {
+            cflags: [
+                "-Wno-exit-time-destructors",
+            ],
+            static_libs: [
+                "adbroot_aidl_interface-cpp",
+            ],
+            shared_libs: [
+                "libbinder",
+                "libutils",
+            ],
+        },
+        recovery: {
+            exclude_static_libs: [
+                "adbroot_aidl_interface-cpp",
+            ],
+            exclude_shared_libs: [
+                "libbinder",
+                "libutils",
+            ],
+        },
+    },
 }
 
 cc_defaults {
@@ -423,34 +446,21 @@ cc_library {
                 "daemon/restart_service.cpp",
                 "daemon/set_verity_enable_state_service.cpp",
             ],
-            cflags: [
-                "-Wno-exit-time-destructors",
-            ],
             static_libs: [
-                "adbroot_aidl_interface-cpp",
                 "libavb_user",
             ],
             shared_libs: [
-                "libbinder",
                 "libbootloader_message",
                 "libmdnssd",
                 "libext4_utils",
                 "libfec",
                 "libfs_mgr",
                 "libselinux",
-                "libutils",
             ],
         },
         recovery: {
             exclude_srcs: [
                 "daemon/abb_service.cpp",
-            ],
-            exclude_static_libs: [
-                "adbroot_aidl_interface-cpp",
-            ],
-            exclude_shared_libs: [
-                "libbinder",
-                "libutils",
             ],
         },
     },
