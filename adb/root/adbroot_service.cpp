@@ -78,8 +78,9 @@ binder::Status ADBRootService::setEnabled(bool enabled) {
 
 binder::Status ADBRootService::getEnabled(bool* _aidl_return) {
     uid_t uid = IPCThreadState::self()->getCallingUid();
-    if (uid != AID_SYSTEM && uid != AID_SHELL) {
-        return SecurityException("Caller must be system or shell");
+    if (uid != AID_SYSTEM && uid != AID_SHELL && uid != AID_ROOT) {
+        LOG(ERROR) << uid;
+        return SecurityException("Caller must be system, shell or root");
     }
 
     AutoMutex _l(lock_);
