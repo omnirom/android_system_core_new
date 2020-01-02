@@ -22,6 +22,30 @@
       "revId": "e596410927d6db77e06c4aa49bf2eecf6ff2ed32",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "707e1f69_a400d871",
+        "filename": "fs_mgr/include_fstab/fstab/fstab.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 24438
+      },
+      "writtenOn": "2020-01-02T15:08:47Z",
+      "side": 1,
+      "message": "https://source.codeaurora.org/quic/la/platform/system/core/commit/fs_mgr/include_fstab/fstab/fstab.h?h\u003dLA.UM.8.9.r1-07000-SM6xx.0\u0026id\u003dc69050ee52338339f0eb1a07aa3eeeeeb2e209d9",
+      "parentUuid": "1f94abd7_d00c61fc",
+      "range": {
+        "startLine": 87,
+        "startChar": 8,
+        "endLine": 87,
+        "endChar": 27
+      },
+      "revId": "e596410927d6db77e06c4aa49bf2eecf6ff2ed32",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
     }
   ]
 }
