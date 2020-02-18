@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f0d7117e_ada855ba",
+        "filename": "fs_mgr/fs_mgr_fstab.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 786,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2020-02-18T14:06:42Z",
+      "side": 1,
+      "message": "you\u0027re leaking the char",
+      "revId": "7cfd77864323e4a8fc0a21b202468f74a5a658a9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
