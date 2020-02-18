@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f58e7ac7_76dba42c",
+        "filename": "fs_mgr/fs_mgr_fstab.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 3917
+      },
+      "writtenOn": "2020-02-18T05:58:34Z",
+      "side": 1,
+      "message": "If I understand the lib correctly, you have to free the return value as it was created with dup.",
+      "revId": "1c0f6e66d25f589b3cc2a91654d9e2e31dd2398d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
