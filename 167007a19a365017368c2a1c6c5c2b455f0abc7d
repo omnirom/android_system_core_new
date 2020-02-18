@@ -45,6 +45,24 @@
       "revId": "167007a19a365017368c2a1c6c5c2b455f0abc7d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "953ea4e8_c2cb7283",
+        "filename": "fs_mgr/fs_mgr_fstab.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 795,
+      "author": {
+        "id": 18205
+      },
+      "writtenOn": "2020-02-18T13:19:57Z",
+      "side": 1,
+      "message": "Can you run \u003d\u003d between std::string and char*?",
+      "parentUuid": "c4022b36_c916adbb",
+      "revId": "167007a19a365017368c2a1c6c5c2b455f0abc7d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
