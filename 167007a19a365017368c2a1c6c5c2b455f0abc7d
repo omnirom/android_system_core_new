@@ -63,6 +63,24 @@
       "revId": "167007a19a365017368c2a1c6c5c2b455f0abc7d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e288ee2b_ecd635fa",
+        "filename": "fs_mgr/fs_mgr_fstab.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 795,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2020-02-18T13:20:50Z",
+      "side": 1,
+      "message": "If std::string is before yes, it\u0027ll translate to std::string.compare() that accepts any string",
+      "parentUuid": "953ea4e8_c2cb7283",
+      "revId": "167007a19a365017368c2a1c6c5c2b455f0abc7d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
