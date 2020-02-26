@@ -207,6 +207,17 @@ static bool InitFunctionFs(usb_handle* h) {
         if (ret < 0) {
             PLOG(ERROR) << "cannot write descriptors " << kUsbFfsFastbootEp0;
             goto err;
+
+            // fallback to v1 descriptor, with different endpoint addresses for source and sink
+            v1_descriptor.fs_descs.sink.bEndpointAddress &= ~USB_ENDPOINT_NUMBER_MASK;
+            v1_descriptor.fs_descs.sink.bEndpointAddress |= 2;
+            v1_descriptor.hs_descs.sink.bEndpointAddress &= ~USB_ENDPOINT_NUMBER_MASK;
+            v1_descriptor.hs_descs.sink.bEndpointAddress |= 2;
+            ret = write(h->control.get(), &v1_descriptor, sizeof(v1_descriptor));
+            if (ret < 0) {
+                PLOG(ERROR) << "cannot write descriptors " << kUsbFfsFastbootEp0;
+                goto err;
+            }
         }
 
         ret = write(h->control.get(), &strings, sizeof(strings));
