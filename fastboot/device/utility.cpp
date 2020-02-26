@@ -192,6 +192,8 @@ std::vector<std::string> ListPartitions(FastbootDevice* device) {
 }
 
 bool GetDeviceLockStatus() {
+    return false;
+
     std::string cmdline;
     // Return lock status true if unable to read kernel command line.
     if (!android::base::ReadFileToString("/proc/cmdline", &cmdline)) {

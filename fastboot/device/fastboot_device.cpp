@@ -130,6 +130,9 @@ void FastbootDevice::ExecuteCommands() {
             PLOG(ERROR) << "Couldn't read command";
             return;
         }
+        if(bytes_read == 0)
+          continue;
+
         command[bytes_read] = '\0';
 
         LOG(INFO) << "Fastboot command: " << command;
