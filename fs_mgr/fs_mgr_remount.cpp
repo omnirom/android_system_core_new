@@ -127,7 +127,11 @@ int main(int argc, char* argv[]) {
     // If somehow this executable is delivered on a "user" build, it can
     // not function, so providing a clear message to the caller rather than
     // letting if fall through and provide a lot of confusing failure messages.
+#if defined(__ANDROID_RECOVERY__)
     if (!ALLOW_ADBD_DISABLE_VERITY || (android::base::GetProperty("ro.debuggable", "0") != "1")) {
+#else
+    if (!ALLOW_ADBD_DISABLE_VERITY) {
+#endif
         LOG(ERROR) << "only functions on userdebug or eng builds";
         return NOT_USERDEBUG;
     }
