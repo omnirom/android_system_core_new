@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "45580805_d379b2ab",
+        "filename": "fastboot/device/utility.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2020-03-11T14:33:41Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 195,
+        "startChar": 0,
+        "endLine": 196,
+        "endChar": 21
+      },
+      "revId": "fe6d2b88661eadec099d1fe50173bf508fe87158",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06d70857_ccfe5312",
+        "filename": "fastboot/device/utility.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2020-03-11T14:33:41Z",
+      "side": 1,
+      "message": "green",
+      "range": {
+        "startLine": 203,
+        "startChar": 55,
+        "endLine": 203,
+        "endChar": 61
+      },
+      "revId": "fe6d2b88661eadec099d1fe50173bf508fe87158",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42a646eb_b8b1ba0f",
+        "filename": "fastboot/device/utility.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2020-03-11T14:33:41Z",
+      "side": 1,
+      "message": "!\u003d",
+      "range": {
+        "startLine": 203,
+        "startChar": 64,
+        "endLine": 203,
+        "endChar": 66
+      },
+      "revId": "fe6d2b88661eadec099d1fe50173bf508fe87158",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
