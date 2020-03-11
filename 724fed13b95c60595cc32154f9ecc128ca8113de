@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e4e74f53_31d5aa91",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2020-03-11T14:46:59Z",
+      "side": 1,
+      "message": "Fix pleasE?",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 43
+      },
+      "revId": "724fed13b95c60595cc32154f9ecc128ca8113de",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7cab52e1_e75532e5",
+        "filename": "fastboot/device/usb_client.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2020-03-11T14:46:59Z",
+      "side": 1,
+      "message": "fs_descriptors_v1",
+      "range": {
+        "startLine": 163,
+        "startChar": 42,
+        "endLine": 163,
+        "endChar": 56
+      },
+      "revId": "724fed13b95c60595cc32154f9ecc128ca8113de",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ff96c1a_877a2dd2",
+        "filename": "fastboot/device/usb_client.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2020-03-11T14:46:59Z",
+      "side": 1,
+      "message": "fs_descriptors_v1",
+      "range": {
+        "startLine": 171,
+        "startChar": 42,
+        "endLine": 171,
+        "endChar": 56
+      },
+      "revId": "724fed13b95c60595cc32154f9ecc128ca8113de",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8493d051_9bda66aa",
+        "filename": "fastboot/device/usb_client.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2020-03-11T14:46:59Z",
+      "side": 1,
+      "message": "hs_descriptors_v1",
+      "range": {
+        "startLine": 183,
+        "startChar": 42,
+        "endLine": 183,
+        "endChar": 56
+      },
+      "revId": "724fed13b95c60595cc32154f9ecc128ca8113de",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d3e47a6_aaedd222",
+        "filename": "fastboot/device/usb_client.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2020-03-11T14:46:59Z",
+      "side": 1,
+      "message": "hs_descriptors_v1",
+      "range": {
+        "startLine": 191,
+        "startChar": 42,
+        "endLine": 191,
+        "endChar": 56
+      },
+      "revId": "724fed13b95c60595cc32154f9ecc128ca8113de",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
