@@ -64,16 +64,24 @@
 #if defined(__ANDROID__)
 static const char* root_seclabel = nullptr;
 
+#if defined(__ANDROID_RECOVERY__)
 static inline bool is_device_unlocked() {
     return "orange" == android::base::GetProperty("ro.boot.verifiedbootstate", "");
 }
+#endif
 
 static bool should_drop_capabilities_bounding_set() {
+#if defined(__ANDROID_RECOVERY__)
     if (ALLOW_ADBD_ROOT || is_device_unlocked()) {
         if (__android_log_is_debuggable()) {
             return false;
         }
     }
+#else
+    if (ALLOW_ADBD_ROOT) {
+        return false;
+    }
+#endif
     return true;
 }
 
@@ -240,10 +248,10 @@ int adbd_main(int server_port) {
     // descriptor will always be open.
     adbd_cloexec_auth_socket();
 
-#if defined(ALLOW_ADBD_NO_AUTH)
+#if defined(ALLOW_ADBD_NO_AUTH) || defined(__ANDROID__)
     // If ro.adb.secure is unset, default to no authentication required.
     auth_required = android::base::GetBoolProperty("ro.adb.secure", false);
-#elif defined(__ANDROID__)
+#elif defined(__ANDROID_RECOVERY__)
     if (is_device_unlocked()) {  // allows no authentication when the device is unlocked.
         auth_required = android::base::GetBoolProperty("ro.adb.secure", false);
     }
