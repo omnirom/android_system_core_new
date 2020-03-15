@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "101af18e_c583bc3b",
+        "filename": "adb/daemon/main.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2020-03-15T00:04:50Z",
+      "side": 1,
+      "message": "before I forget, see the latest change I made in adb and apply it there too",
+      "revId": "18dc4d89e98aa632aabc6a2a4280bb9da7986398",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
