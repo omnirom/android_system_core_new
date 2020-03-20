@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aa9d956e_fa4dd6b3",
+        "filename": "adb/daemon/main.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 18205
+      },
+      "writtenOn": "2020-03-20T17:57:24Z",
+      "side": 1,
+      "message": "I\u0027m keeping this for defaulting to root if ro.secure\u003d0",
+      "revId": "40795deb9e4c79e2ccc1136e4ed4fc7d85f049ec",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
