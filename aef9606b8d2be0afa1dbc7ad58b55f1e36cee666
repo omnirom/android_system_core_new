@@ -58,6 +58,24 @@
       "revId": "aef9606b8d2be0afa1dbc7ad58b55f1e36cee666",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "16e3f4e2_2b84f26a",
+        "filename": "adb/daemon/main.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 18205
+      },
+      "writtenOn": "2020-03-21T14:09:26Z",
+      "side": 0,
+      "message": "Like this?",
+      "parentUuid": "2bfcd9ab_cf2e8289",
+      "revId": "aef9606b8d2be0afa1dbc7ad58b55f1e36cee666",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
