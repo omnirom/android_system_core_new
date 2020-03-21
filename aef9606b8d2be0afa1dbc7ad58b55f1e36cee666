@@ -22,6 +22,24 @@
       "revId": "aef9606b8d2be0afa1dbc7ad58b55f1e36cee666",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9c8fa3d_72ec981c",
+        "filename": "adb/daemon/main.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 18205
+      },
+      "writtenOn": "2020-03-21T14:01:46Z",
+      "side": 0,
+      "message": "Here it\u0027s enclosed in #ifdef recovery\nI moved it down to have it shared",
+      "parentUuid": "aeb53a75_ecb55ff7",
+      "revId": "aef9606b8d2be0afa1dbc7ad58b55f1e36cee666",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
