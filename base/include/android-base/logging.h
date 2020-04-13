@@ -445,6 +445,10 @@ class LogMessage {
                       const char* tag, const char* msg);
 
  private:
+  // This overload provides ABI compatibility for binary blobs built against
+  // Android 8.1 and older.
+  LogMessage(const char* file, unsigned int line, LogId id, LogSeverity severity, int error);
+
   const std::unique_ptr<LogMessageData> data_;
 
   DISALLOW_COPY_AND_ASSIGN(LogMessage);
