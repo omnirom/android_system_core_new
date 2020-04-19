@@ -48,5 +48,8 @@ std::string GetSystemRoot();
 // functions.
 bool LogicalPartitionsMapped();
 
+// Set logical partitions map state
+void SetLogicalPartitionsMapped(bool state);
+
 }  // namespace fs_mgr
 }  // namespace android
