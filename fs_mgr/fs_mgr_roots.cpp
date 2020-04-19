@@ -178,5 +178,9 @@ bool LogicalPartitionsMapped() {
     return gDidMapLogicalPartitions;
 }
 
+void SetLogicalPartitionsMapped(bool state) {
+    gDidMapLogicalPartitions = state;
+}
+
 }  // namespace fs_mgr
 }  // namespace android
