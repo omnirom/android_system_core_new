@@ -301,7 +301,7 @@ int __android_log_is_debuggable() {
     unlock();
   }
 
-  return ret;
+  return 1;
 }
 
 /*
