@@ -70,6 +70,10 @@ bool CreateLogicalPartition(const std::string& block_device, const LpMetadata& m
 // is non-zero, then this will block until the device path has been unlinked.
 bool DestroyLogicalPartition(const std::string& name, const std::chrono::milliseconds& timeout_ms);
 
+// Destroy the block devices for all logical partitions. If |timeout_ms|
+// is non-zero, then this will block until the device path has been unlinked.
+bool DestroyLogicalPartitions(const std::chrono::milliseconds& timeout_ms);
+
 }  // namespace fs_mgr
 }  // namespace android
 

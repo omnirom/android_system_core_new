@@ -217,5 +217,22 @@ bool DestroyLogicalPartition(const std::string& name, const std::chrono::millise
     return true;
 }
 
+bool DestroyLogicalPartitions(const std::chrono::milliseconds& timeout_ms) {
+    DeviceMapper& dm = DeviceMapper::Instance();
+    std::vector<dm::DeviceMapper::DmBlockDevice> devices;
+    if (!dm.GetAvailableDevices(&devices)) {
+        LERROR << "Unable to get mapped logical partitions";
+        return false;
+    }
+    for (const auto& dev: devices) {
+        if (!DestroyLogicalPartition(dev.name(), timeout_ms)) {
+            LERROR << "Unable to unmap logical partition " << dev.name();
+            return false;
+        }
+    }
+    LINFO << "Unmapped logical partitions";
+    return true;
+}
+
 }  // namespace fs_mgr
 }  // namespace android
