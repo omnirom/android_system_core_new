@@ -119,6 +119,13 @@ cc_library_static {
         "libbase_headers",
         "libgsi_headers",
     ],
+    product_variables: {
+        lineage: {
+            allow_empty_slotsuffix: {
+                cppflags: ["-DALLOW_EMPTY_SLOTSUFFIX"],
+            },
+        },
+    },
 }
 
 cc_binary {
