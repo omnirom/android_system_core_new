@@ -90,4 +90,11 @@ cc_library_static {
     ],
     export_include_dirs: ["include_fstab"],
     header_libs: ["libbase_headers"],
+    product_variables: {
+        lineage: {
+            uses_nvidia_enhancements: {
+                cppflags: ["-DNVIDIA_SLOTSELECT"],
+            },
+        },
+    },
 }
