@@ -90,4 +90,11 @@ cc_library_static {
     ],
     export_include_dirs: ["include_fstab"],
     header_libs: ["libbase_headers"],
+    product_variables: {
+        lineage: {
+            allow_empty_slotsuffix: {
+                cppflags: ["-DALLOW_EMPTY_SUFFIX"],
+            },
+        },
+    },
 }
