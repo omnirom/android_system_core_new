@@ -63,8 +63,10 @@ bool fs_mgr_update_for_slotselect(Fstab* fstab) {
 
         if (ab_suffix.empty()) {
             ab_suffix = fs_mgr_get_slot_suffix();
+#ifndef ALLOW_EMPTY_SLOTSUFFIX
             // Return false if failed to get ab_suffix when MF_SLOTSELECT is specified.
             if (ab_suffix.empty()) return false;
+#endif
         }
 
         const auto& update_suffix =
