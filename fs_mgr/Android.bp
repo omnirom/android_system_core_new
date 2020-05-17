@@ -119,6 +119,13 @@ cc_library_static {
         "libbase_headers",
         "libgsi_headers",
     ],
+    product_variables: {
+        lineage: {
+            uses_nvidia_enhancements: {
+                cppflags: ["-DNVIDIA_SLOTSELECT"],
+            },
+        },
+    },
 }
 
 cc_binary {
