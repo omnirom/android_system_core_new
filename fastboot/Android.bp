@@ -128,6 +128,7 @@ cc_binary {
         "android.hardware.boot@1.1",
         "android.hardware.fastboot@1.0",
         "android.hardware.health@2.0",
+        "libadbd",
         "libasyncio",
         "libbase",
         "libbootloader_message",
