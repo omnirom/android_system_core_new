@@ -475,18 +475,31 @@ cc_library {
                 "daemon/mdns.cpp",
                 "daemon/restart_service.cpp",
             ],
+            cflags: [
+                "-Wno-exit-time-destructors",
+            ],
+            static_libs: [
+                "adbroot_aidl_interface-ndk_platform",
+            ],
             shared_libs: [
+                "libbinder_ndk",
                 "libmdnssd",
                 "libselinux",
+                "libutils",
             ],
         },
         recovery: {
             exclude_srcs: [
                 "daemon/abb_service.cpp",
             ],
+            exclude_static_libs: [
+                "adbroot_aidl_interface-ndk_platform",
+            ],
             exclude_shared_libs: [
                 "libadb_pairing_auth",
                 "libadb_pairing_connection",
+                "libbinder_ndk",
+                "libutils",
             ],
         },
     },
@@ -584,13 +597,25 @@ cc_binary {
     shared_libs: [
         "libadb_protos",
         "libadbd_auth",
+        "libbinder_ndk",
     ],
 
     target: {
+        android: {
+            static_libs: [
+                "adbroot_aidl_interface-ndk_platform",
+            ],
+        },
+
         recovery: {
+            exclude_static_libs: [
+                "adbroot_aidl_interface-ndk_platform",
+            ],
+
             exclude_shared_libs: [
                 "libadb_pairing_auth",
                 "libadb_pairing_connection",
+                "libbinder_ndk",
             ],
         }
     },
@@ -615,6 +640,26 @@ phony {
         "libadbd_fs",
         "reboot.recovery",
     ],
+}
+
+cc_binary {
+    name: "adb_root",
+    srcs: [
+        "root/adbroot_service.cpp",
+        "root/main.cpp",
+    ],
+    init_rc: [
+        "root/adb_root.rc",
+    ],
+    static_libs: [
+        "adbroot_aidl_interface-ndk_platform",
+    ],
+    shared_libs: [
+        "libbase",
+        "libbinder_ndk",
+        "liblog",
+        "libutils",
+    ]
 }
 
 cc_binary {
@@ -817,5 +862,29 @@ cc_test_host {
         "fastdeploy/testdata/rotating_cube-release.apk",
         "fastdeploy/testdata/sample.apk",
         "fastdeploy/testdata/sample.cd",
+    ],
+}
+
+aidl_interface {
+    name: "adbroot_aidl_interface",
+    unstable: true,
+    srcs: [
+        "aidl/android/adbroot/IADBRootService.aidl",
+    ],
+    local_include_dir: "aidl",
+    backend: {
+        ndk: {
+            apex_available: [
+                "//apex_available:platform",
+                "com.android.adbd",
+            ],
+        },
+    },
+}
+
+filegroup {
+    name: "adbrootservice_aidl",
+    srcs: [
+        "aidl/android/adbroot/IADBRootService.aidl",
     ],
 }
