@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7b0db155_df6f11bd",
+        "filename": "adb/root/adbroot_service.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2020-09-17T10:01:39Z",
+      "side": 1,
+      "message": "Can very likely merge these 2 together.\nAlso maybe use string_view to use constexpr?\nconstexpr std::string_view kEnabledPath \u003d \"/data/adbroot/enabled\"sv;",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 39
+      },
+      "revId": "461df38185b1aa0e51e626a6a299995b576e3e2a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
