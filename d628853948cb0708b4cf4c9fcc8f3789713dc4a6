@@ -46,6 +46,30 @@
       "revId": "d628853948cb0708b4cf4c9fcc8f3789713dc4a6",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "769bbb45_0d8d525f",
+        "filename": "init/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2020-10-15T14:09:16Z",
+      "side": 1,
+      "message": "Don\u0027t run bpfix.",
+      "parentUuid": "88930db6_164f3c2a",
+      "range": {
+        "startLine": 211,
+        "startChar": 4,
+        "endLine": 211,
+        "endChar": 32
+      },
+      "revId": "d628853948cb0708b4cf4c9fcc8f3789713dc4a6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
     }
   ]
 }
