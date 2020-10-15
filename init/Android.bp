@@ -14,6 +14,19 @@
 // limitations under the License.
 //
 
+soong_config_module_type_import {
+    from: "vendor/lineage/build/soong/Android.bp",
+    module_types: ["vendor_init_lib_defaults"],
+}
+
+cc_library_static {
+    name: "vendor_init_defaults",
+    recovery_available: true,
+    srcs: [
+        "vendor_init.cpp",
+    ],
+}
+
 init_common_sources = [
     "action.cpp",
     "action_manager.cpp",
@@ -64,7 +77,6 @@ init_device_sources = [
     "uevent_listener.cpp",
     "ueventd.cpp",
     "ueventd_parser.cpp",
-    "vendor_init.cpp",
 ]
 init_host_sources = [
     "check_builtins.cpp",
@@ -158,11 +170,12 @@ cc_defaults {
 
 cc_library_static {
     name: "libinit",
-    recovery_available: true,
     defaults: [
         "init_defaults",
         "selinux_policy_version",
+        "vendor_init_lib",
     ],
+    recovery_available: true,
     srcs: init_common_sources + init_device_sources,
     whole_static_libs: [
         "libcap",
@@ -184,14 +197,6 @@ cc_library_static {
             ],
         },
     },
-
-    product_variables: {
-        lineage: {
-            target_init_vendor_lib: {
-                whole_static_libs: ["%s"],
-            },
-        },
-    },
 }
 
 phony {
@@ -203,9 +208,9 @@ phony {
 
 cc_binary {
     name: "init_second_stage",
+    defaults: ["init_defaults"],
     recovery_available: true,
     stem: "init",
-    defaults: ["init_defaults"],
     static_libs: ["libinit"],
     required: [
         "e2fsdroid",
