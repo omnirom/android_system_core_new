@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "61f50ca4_6786e8f3",
+        "filename": "init/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 2936
+      },
+      "writtenOn": "2020-10-15T13:59:56Z",
+      "side": 1,
+      "message": "nit: unnecessary code movement?",
+      "range": {
+        "startLine": 211,
+        "startChar": 4,
+        "endLine": 211,
+        "endChar": 32
+      },
+      "revId": "d628853948cb0708b4cf4c9fcc8f3789713dc4a6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
