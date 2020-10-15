@@ -22,6 +22,30 @@
       "revId": "2137676fa39dfd6192bc82fdd759f7fc0206053c",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2c36308_425bf338",
+        "filename": "init/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2020-10-15T16:50:16Z",
+      "side": 1,
+      "message": "Looks like we don\u0027t since soong imports them automatically.",
+      "parentUuid": "d0829dc5_423f9794",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 31
+      },
+      "revId": "2137676fa39dfd6192bc82fdd759f7fc0206053c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
     }
   ]
 }
