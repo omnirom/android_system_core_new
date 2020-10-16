@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "67462172_1e1c5a48",
+        "filename": "libutils/RefBase.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 733,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2020-10-16T23:29:20Z",
+      "side": 1,
+      "message": "Spaces, not tabs.",
+      "range": {
+        "startLine": 733,
+        "startChar": 0,
+        "endLine": 733,
+        "endChar": 1
+      },
+      "revId": "9cd02a4501e25974ad99f09dc2c0ae56bc4baec5",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
