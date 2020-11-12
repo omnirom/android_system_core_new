@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5525af56_a105dbf1",
+        "filename": "fs_mgr/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2020-11-12T19:07:59Z",
+      "side": 0,
+      "message": "removing the lib from the default looks odd to me, I\u0027d rather add blkid here",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 23
+      },
+      "revId": "849c34b7040dd9df9c14f38ff3b97c81bdfbd2cc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
