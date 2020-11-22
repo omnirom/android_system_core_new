@@ -70,6 +70,30 @@
       "revId": "849c34b7040dd9df9c14f38ff3b97c81bdfbd2cc",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82814779_7c8ba82f",
+        "filename": "fs_mgr/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 18205
+      },
+      "writtenOn": "2020-11-22T17:00:39Z",
+      "side": 0,
+      "message": "libext2_blkid needs libext2_uuid to compile, so both must be linked to libfstab.\n\nlibfs_mgr links libfstab so it cannot reinclude libext2_uuid as \u0027whole\u0027 so i need to strip it out. It will still compile because the symbols are now included in libfstab.\n\nThe issue really is that these bastards only link as \u0027whole\u0027 and i don\u0027t quite know why.",
+      "parentUuid": "fe12db67_97fa1b32",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 23
+      },
+      "revId": "849c34b7040dd9df9c14f38ff3b97c81bdfbd2cc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
