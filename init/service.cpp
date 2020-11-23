@@ -262,6 +262,7 @@ void Service::SetProcessAttributesAndCaps() {
 void Service::Reap(const siginfo_t& siginfo) {
     if (!(flags_ & SVC_ONESHOT) || (flags_ & SVC_RESTART)) {
         KillProcessGroup(SIGKILL, false);
+#ifndef DISABLE_KILLING_ONESHOT_SERVICE
     } else {
         // Legacy behavior from ~2007 until Android R: this else branch did not exist and we did not
         // kill the process group in this case.
@@ -271,6 +272,7 @@ void Service::Reap(const siginfo_t& siginfo) {
             // detects a difference in behavior has occurred.
             KillProcessGroup(SIGKILL, true);
         }
+#endif
     }
 
     // Remove any socket resources we may have created.
