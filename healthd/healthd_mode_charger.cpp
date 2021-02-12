@@ -455,7 +455,7 @@ void Charger::SetNextKeyCheck(key_state* key, int64_t timeout) {
 void Charger::ProcessKey(int code, int64_t now) {
     key_state* key = &keys_[code];
 
-    if (code == KEY_POWER) {
+    if (code == KEY_POWER || code == KEY_HOME || code == KEY_HOMEPAGE) {
         if (key->down) {
             int64_t reboot_timeout = key->timestamp + POWER_ON_KEY_TIME;
             if (now >= reboot_timeout) {
@@ -500,8 +500,15 @@ void Charger::ProcessKey(int code, int64_t now) {
     key->pending = false;
 }
 
+<<<<<<< HEAD   (f29ed7 init: Don't run update_sys_usb_config if /data isn't mounted)
 void Charger::HandleInputState(int64_t now) {
     ProcessKey(KEY_POWER, now);
+=======
+static void handle_input_state(charger* charger, int64_t now) {
+    process_key(charger, KEY_POWER, now);
+    process_key(charger, KEY_HOME, now);
+    process_key(charger, KEY_HOMEPAGE, now);
+>>>>>>> CHANGE (e1af35 healthd: allow home(page) button to wake)
 
     if (next_key_check_ != -1 && now > next_key_check_) next_key_check_ = -1;
 }
