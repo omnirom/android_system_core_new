@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2917eb57_6bddf4be",
+        "filename": "fastboot/fastboot.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1011,
+      "author": {
+        "id": 18590
+      },
+      "writtenOn": "2021-03-29T19:47:46Z",
+      "side": 1,
+      "message": "same as 1020",
+      "revId": "c8c1a29b6887c0f76b47f18b08260406f7e0eddd",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3fec7f9c_6b5d3571",
+        "filename": "fastboot/fastboot.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1020,
+      "author": {
+        "id": 18590
+      },
+      "writtenOn": "2021-03-29T19:47:46Z",
+      "side": 1,
+      "message": "can\u0027t return anything in a void",
+      "revId": "c8c1a29b6887c0f76b47f18b08260406f7e0eddd",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
