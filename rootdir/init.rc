@@ -13,6 +13,17 @@ import /system/etc/init/hw/init.${ro.zygote}.rc
 
 # Cgroups are mounted right before early-init using list from /etc/cgroups.json
 on early-init
+    # pstore/ramoops previous console log
+    mount pstore pstore /sys/fs/pstore nodev noexec nosuid
+    chown system log /sys/fs/pstore
+    chmod 0550 /sys/fs/pstore
+    chown system log /sys/fs/pstore/console-ramoops
+    chmod 0440 /sys/fs/pstore/console-ramoops
+    chown system log /sys/fs/pstore/console-ramoops-0
+    chmod 0440 /sys/fs/pstore/console-ramoops-0
+    chown system log /sys/fs/pstore/pmsg-ramoops-0
+    chmod 0440 /sys/fs/pstore/pmsg-ramoops-0
+
     # Disable sysrq from keyboard
     write /proc/sys/kernel/sysrq 0
 
@@ -341,17 +352,6 @@ on init
     # Create location for fs_mgr to store abbreviated output from filesystem
     # checker programs.
     mkdir /dev/fscklogs 0770 root system
-
-    # pstore/ramoops previous console log
-    mount pstore pstore /sys/fs/pstore nodev noexec nosuid
-    chown system log /sys/fs/pstore
-    chmod 0550 /sys/fs/pstore
-    chown system log /sys/fs/pstore/console-ramoops
-    chmod 0440 /sys/fs/pstore/console-ramoops
-    chown system log /sys/fs/pstore/console-ramoops-0
-    chmod 0440 /sys/fs/pstore/console-ramoops-0
-    chown system log /sys/fs/pstore/pmsg-ramoops-0
-    chmod 0440 /sys/fs/pstore/pmsg-ramoops-0
 
     # enable armv8_deprecated instruction hooks
     write /proc/sys/abi/swp 1
@@ -1049,9 +1049,6 @@ on property:ro.debuggable=1
     chmod 0773 /data/misc/trace
     # Give reads to anyone for the window trace folder on debug builds.
     chmod 0775 /data/misc/wmtrace
-
-on init && property:ro.debuggable=1
-    start console
 
 on userspace-reboot-requested
   # TODO(b/135984674): reset all necessary properties here.
