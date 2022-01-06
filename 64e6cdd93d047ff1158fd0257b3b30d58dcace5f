@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07f95b6f_6316271b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2022-01-06T22:40:53Z",
+      "side": 1,
+      "message": "I\u0027m not sure this is the proper prop, but keep both debuggable check and this",
+      "revId": "64e6cdd93d047ff1158fd0257b3b30d58dcace5f",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
