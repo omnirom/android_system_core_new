@@ -16,6 +16,23 @@
       "message": "Thoughts?",
       "revId": "d2e9e44f91b4151fa9a6fecf7ed590ca65a71b40",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0044ed9c_25e10932",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2022-01-06T22:08:46Z",
+      "side": 1,
+      "message": "You sure? Wouldn\u0027t this break adb remount with RO partitions?",
+      "revId": "d2e9e44f91b4151fa9a6fecf7ed590ca65a71b40",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
