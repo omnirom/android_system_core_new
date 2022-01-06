@@ -226,11 +226,4 @@ cc_binary {
     srcs: [
         "clean_scratch_files.cpp",
     ],
-    product_variables: {
-        debuggable: {
-            init_rc: [
-                "clean_scratch_files.rc",
-            ],
-        },
-    },
 }
