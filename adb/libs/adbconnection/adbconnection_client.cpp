@@ -27,7 +27,6 @@
 
 #include <android-base/cmsg.h>
 #include <android-base/logging.h>
-#include <android-base/properties.h>
 #include <android-base/unique_fd.h>
 
 using android::base::unique_fd;
@@ -98,16 +97,6 @@ AdbConnectionClientContext* adbconnection_client_new(
     PLOG(ERROR) << "failed to create Unix domain socket";
     return nullptr;
   }
-
-#if defined(__ANDROID__)
-  // It's possible that adbd isn't running at this point.
-  // We don't want to just blindly connect, because if there's nothing listening, we'll end up
-  // waking up every second and preventing the CPU from going to sleep.
-  if (!android::base::WaitForProperty("init.svc.adbd", "running")) {
-    LOG(ERROR) << "adbd isn't running";
-    return nullptr;
-  }
-#endif
 
   struct timeval timeout;
   timeout.tv_sec = 1;
