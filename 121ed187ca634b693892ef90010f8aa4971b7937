@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa9ccff3_1650ff87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18796
+      },
+      "writtenOn": "2022-01-31T15:43:04Z",
+      "side": 1,
+      "message": "Fixes error while compiling SDK emulator targets (x86, x86_64 user builds)\nhttps://paste.ubuntu.com/p/JwhCBTvZWv/\n\nits merged in aosp master https://android-review.googlesource.com/c/platform/system/core/+/1682488",
+      "revId": "121ed187ca634b693892ef90010f8aa4971b7937",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
