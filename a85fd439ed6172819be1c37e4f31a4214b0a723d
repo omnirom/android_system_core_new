@@ -16,6 +16,23 @@
       "message": "Overriding a service is supported by AOSP so for it to complain about duplicate interfaces when the service in question is an override is a bug.",
       "revId": "a85fd439ed6172819be1c37e4f31a4214b0a723d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82c474fd_8bc705c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 29415
+      },
+      "writtenOn": "2022-03-06T23:31:36Z",
+      "side": 1,
+      "message": "Also submitted upstream: https://android-review.googlesource.com/c/platform/system/core/+/2009975",
+      "revId": "a85fd439ed6172819be1c37e4f31a4214b0a723d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
