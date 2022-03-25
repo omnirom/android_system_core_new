@@ -179,6 +179,10 @@
 #define AID_SYSTEM_EXT_RESERVED_START 7500
 #define AID_SYSTEM_EXT_RESERVED_END 7999
 
+/* The range 8500-8999 is reserved for the custom partition. */
+#define AID_CUSTOM_RESERVED_START 8500
+#define AID_CUSTOM_RESERVED_END 8999
+
 #define AID_EVERYBODY 9997 /* shared between all apps in the same profile */
 #define AID_MISC 9998      /* access to misc storage */
 #define AID_NOBODY 9999

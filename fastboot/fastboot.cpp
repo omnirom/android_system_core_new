@@ -158,6 +158,7 @@ static Image images[] = {
                   "system_ext.img",   "system_ext.sig",
                                                       "system_ext",
                                                                   true,  ImageType::Normal },
+    { "custom",   "custom.img",       "custom.sig",   "custom",   false, ImageType::Normal },
     { nullptr,    "system_other.img", "system.sig",   "system",   true,  ImageType::Normal },
     { "userdata", "userdata.img",     "userdata.sig", "userdata", true,  ImageType::Extra },
     { "vbmeta",   "vbmeta.img",       "vbmeta.sig",   "vbmeta",   true,  ImageType::BootCritical },

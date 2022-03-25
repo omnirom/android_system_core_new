@@ -322,6 +322,7 @@ static void LoadBootScripts(ActionManager& action_manager, ServiceList& service_
         if (!parser.ParseConfig("/product/etc/init")) {
             late_import_paths.emplace_back("/product/etc/init");
         }
+        parser.ParseConfig("/custom/etc/init");
     } else {
         parser.ParseConfig(bootscript);
     }

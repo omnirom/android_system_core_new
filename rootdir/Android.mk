@@ -107,6 +107,11 @@ ifdef BOARD_USES_SYSTEM_EXTIMAGE
 else
   LOCAL_POST_INSTALL_CMD += ; ln -sf /system/system_ext $(TARGET_ROOT_OUT)/system_ext
 endif
+ifdef BOARD_USES_CUSTOMIMAGE
+  LOCAL_POST_INSTALL_CMD += ; mkdir -p $(TARGET_ROOT_OUT)/custom
+else
+  LOCAL_POST_INSTALL_CMD += ; ln -sf /system/custom $(TARGET_ROOT_OUT)/custom
+endif
 ifdef BOARD_USES_METADATA_PARTITION
   LOCAL_POST_INSTALL_CMD += ; mkdir -p $(TARGET_ROOT_OUT)/metadata
 endif

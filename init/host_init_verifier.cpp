@@ -66,7 +66,7 @@ static std::vector<std::string> passwd_files;
 
 // NOTE: Keep this in sync with the order used by init.cpp LoadBootScripts()
 static const std::vector<std::string> partition_search_order =
-        std::vector<std::string>({"system", "system_ext", "odm", "vendor", "product"});
+        std::vector<std::string>({"custom", "system", "system_ext", "odm", "vendor", "product"});
 
 static std::vector<std::pair<std::string, int>> GetVendorPasswd(const std::string& passwd_file) {
     std::string passwd;
@@ -172,6 +172,7 @@ Multiple script mode options:
   --out_odm=DIR               Path to the output product directory for the odm partition.
   --out_vendor=DIR            Path to the output product directory for the vendor partition.
   --out_product=DIR           Path to the output product directory for the product partition.
+  --out_custom=DIR            Path to the output product directory for the custom partition.
 )");
 }
 
@@ -233,6 +234,7 @@ int main(int argc, char** argv) {
                 {"out_odm", required_argument, nullptr, 0},
                 {"out_vendor", required_argument, nullptr, 0},
                 {"out_product", required_argument, nullptr, 0},
+                {"out_custom", required_argument, nullptr, 0},
                 {nullptr, 0, nullptr, 0},
         };
 
