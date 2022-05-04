@@ -171,7 +171,7 @@ std::string FsManagerAvbOps::GetLogicalPath(const std::string& partition_name) {
 AvbIOResult FsManagerAvbOps::ReadFromPartition(const char* partition, int64_t offset,
                                                size_t num_bytes, void* buffer,
                                                size_t* out_num_read) {
-    std::string path = "/dev/block/by-name/"s + partition;
+    std::string path = "/dev/block/"s + partition;
 
     // Ensures the device path (a symlink created by init) is ready to access.
     if (!WaitForFile(path, 1s)) {
