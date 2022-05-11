@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b93926a_57084cfe",
+        "filename": "fastboot/device/variables.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2022-05-11T19:36:26Z",
+      "side": 1,
+      "message": "```\n*message \u003d android::base::GetProperty(\"ro.boot.hardware.revision\",\n        android::base::GetProperty(\"ro.revision\", \"\"));\n```",
+      "range": {
+        "startLine": 438,
+        "startChar": 0,
+        "endLine": 441,
+        "endChar": 5
+      },
+      "revId": "33f3ef0877bef7ec59465fb580016a9aaab191c0",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
