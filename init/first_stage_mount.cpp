@@ -734,6 +734,11 @@ bool FirstStageMountVBootV2::GetDmVerityDevices(std::set<std::string>* devices) 
 bool FirstStageMountVBootV2::SetUpDmVerity(FstabEntry* fstab_entry) {
     AvbHashtreeResult hashtree_result;
 
+    if (!fstab_entry->fs_mgr_flags.avb) {
+        LOG(INFO) << "AVB is not enabled, skip dm-verity setup for " << fstab_entry->mount_point;
+        return true;
+    }
+
     // It's possible for a fstab_entry to have both avb_keys and avb flag.
     // In this case, try avb_keys first, then fallback to avb flag.
     if (!fstab_entry->avb_keys.empty()) {
