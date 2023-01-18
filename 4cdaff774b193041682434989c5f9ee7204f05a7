@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18ec43ae_e00df001",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32245
+      },
+      "writtenOn": "2023-01-18T16:27:37Z",
+      "side": 1,
+      "message": "This fixes booting GSIs on Android 13 on non-AVB devices.\n(This was an issue on early A13 tags, I haven\u0027t tried booting GSI without this patch on recent A13 tags yet)\n\nAndroid 13 has dropped support for AVB 1.0\nNon AVB devices were using AVB 1.0 logic on earlier android versions\nNow it uses AVB 2.0 logic, which isn\u0027t suitable for non-AVB devices",
+      "revId": "4cdaff774b193041682434989c5f9ee7204f05a7",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
