@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1912b28_eba97d0d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32245
+      },
+      "writtenOn": "2023-01-19T21:45:21Z",
+      "side": 1,
+      "message": "v2 patch, Still able to boot GSI/DSU\n\nMi8937:/ # dmesg|grep AVB\n[    4.009895] init: AVB is not enabled, skip verity setup for \u0027/metadata\u0027\n[    4.216227] init: AVB is not enabled, skip verity setup for \u0027/system\u0027\n[    4.229793] init: AVB is not enabled, skip verity setup for \u0027/vendor\u0027\n[    4.233774] init: AVB is not enabled, skip verity setup for \u0027/odm\u0027",
+      "revId": "0dedfabe47371f6639fdcdf3ad037929b36309db",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
