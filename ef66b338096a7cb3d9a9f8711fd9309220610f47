@@ -16,6 +16,23 @@
       "message": "Needed for using Retrofit Dynamic Partitions on unified targets, which has different partition sizes on different devices",
       "revId": "ef66b338096a7cb3d9a9f8711fd9309220610f47",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85255e54_10be16c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32245
+      },
+      "writtenOn": "2023-01-24T06:28:52Z",
+      "side": 1,
+      "message": "I\u0027ve been building with that patch for a lot of devices for months, no problem so far",
+      "revId": "ef66b338096a7cb3d9a9f8711fd9309220610f47",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
