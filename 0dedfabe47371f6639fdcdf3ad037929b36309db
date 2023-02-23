@@ -16,6 +16,23 @@
       "message": "v2 patch, Still able to boot GSI/DSU\n\nMi8937:/ # dmesg|grep AVB\n[    4.009895] init: AVB is not enabled, skip verity setup for \u0027/metadata\u0027\n[    4.216227] init: AVB is not enabled, skip verity setup for \u0027/system\u0027\n[    4.229793] init: AVB is not enabled, skip verity setup for \u0027/vendor\u0027\n[    4.233774] init: AVB is not enabled, skip verity setup for \u0027/odm\u0027",
       "revId": "0dedfabe47371f6639fdcdf3ad037929b36309db",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ada5d4b9_e5750479",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32245
+      },
+      "writtenOn": "2023-02-23T08:39:19Z",
+      "side": 1,
+      "message": "Let me correct it, it only affects DSU.. Flashing GSI to partition still boots fine.\n\nJust reconfirmed on latest LOS20, DSU doesn\u0027t boot without this:\n[    4.109123] init: DSU slot: dsu\n[    4.164305] init: [libfs_mgr]Created logical partition userdata_gsi on device /dev/block/dm-5\n[    4.172198] init: [libfs_mgr]Created logical partition system_gsi on device /dev/block/dm-6\n[    5.177351] init: [libfs_avb]Device path not found: /dev/block/by-name/vbmeta\n[    6.180941] init: [libfs_avb]Device path not found: /dev/block/by-name/boot\n[    6.181167] init: [libfs_avb]avb_slot_verify failed, result: 2\n[    6.181198] init: Failed to open AvbHandle: No such file or directory\n[    6.181217] init: Failed to setup verity for \u0027/system\u0027: No such file or directory\n[    6.181234] init: Failed to mount /system: No such file or directory\n[    6.181333] init: Failed to mount required partitions early ...\n[    6.181810] init: InitFatalReboot: signal 6",
+      "revId": "0dedfabe47371f6639fdcdf3ad037929b36309db",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
