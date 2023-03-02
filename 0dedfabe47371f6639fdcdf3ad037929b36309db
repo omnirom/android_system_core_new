@@ -50,6 +50,23 @@
       "message": "could someone look into this?\n\nThis is necessary for devices without AVB to use DSU on Android 13.\n\nand, I\u0027ve been building with this change for non-AVB/AVB 1.0/AVB 2.0 devices for long, doesn\u0027t seem to break anything",
       "revId": "0dedfabe47371f6639fdcdf3ad037929b36309db",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ee953ac_01e68611",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2023-03-02T17:42:19Z",
+      "side": 1,
+      "message": "seems like something to push to AOSP too, pls do so, but we can also do it here.",
+      "revId": "0dedfabe47371f6639fdcdf3ad037929b36309db",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
