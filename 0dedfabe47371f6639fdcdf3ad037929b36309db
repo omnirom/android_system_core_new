@@ -85,6 +85,24 @@
       "parentUuid": "5ee953ac_01e68611",
       "revId": "0dedfabe47371f6639fdcdf3ad037929b36309db",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26f5a188_332d160e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 25732
+      },
+      "writtenOn": "2023-03-02T19:48:41Z",
+      "side": 1,
+      "message": "Send to AOSP first for comments",
+      "parentUuid": "b11c970a_7b64abad",
+      "revId": "0dedfabe47371f6639fdcdf3ad037929b36309db",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
