@@ -120,6 +120,24 @@
       "message": "I\u0027d prefer to hear aosp first too ",
       "revId": "0dedfabe47371f6639fdcdf3ad037929b36309db",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75547108_e9284633",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2023-03-03T10:49:32Z",
+      "side": 1,
+      "message": "AOSP dropped avb 1.0 support so I doubt they will care",
+      "parentUuid": "26f5a188_332d160e",
+      "revId": "0dedfabe47371f6639fdcdf3ad037929b36309db",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ],
   "submitRequirementResults": []
