@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9c0fe0c_545bd53f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2023-03-06T01:07:13Z",
+      "side": 1,
+      "message": "17.1 is closed, 18.1 is the earliest we\u0027d accept something to.",
+      "revId": "0578b38dcf214eb91673c7b4a8315c2cc17f7044",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
