@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b02ac9fb_6a23a26a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32245
+      },
+      "writtenOn": "2023-03-07T10:49:12Z",
+      "side": 1,
+      "message": "not the actual issue of some users failing to wipe-super, for Mi439",
+      "revId": "6496392fcc87598d447455f22f5a965848bc6835",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
