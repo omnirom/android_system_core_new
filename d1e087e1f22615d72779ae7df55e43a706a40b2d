@@ -33,6 +33,24 @@
       "message": "This inverts the intended effect, makes it report locked on everything except green.",
       "revId": "d1e087e1f22615d72779ae7df55e43a706a40b2d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29dceb67_5c11fea2",
+        "filename": "fastboot/device/utility.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2023-08-01T20:59:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdf3966e_88f84183",
+      "revId": "d1e087e1f22615d72779ae7df55e43a706a40b2d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
