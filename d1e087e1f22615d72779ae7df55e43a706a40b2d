@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ec86b5d_54f06e3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14048
+      },
+      "writtenOn": "2023-08-01T20:00:04Z",
+      "side": 1,
+      "message": "Reports locked on legacy",
+      "revId": "d1e087e1f22615d72779ae7df55e43a706a40b2d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdf3966e_88f84183",
+        "filename": "fastboot/device/utility.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 14048
+      },
+      "writtenOn": "2023-08-01T20:00:04Z",
+      "side": 1,
+      "message": "This inverts the intended effect, makes it report locked on everything except green.",
+      "revId": "d1e087e1f22615d72779ae7df55e43a706a40b2d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
