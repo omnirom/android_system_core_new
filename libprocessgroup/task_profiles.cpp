@@ -136,6 +136,16 @@ bool ProfileAttribute::GetPathForProcess(uid_t uid, pid_t pid, std::string* path
     return GetPathForTask(pid, path);
 }
 
+bool ProfileAttribute::GetPathForProcess(uid_t uid, pid_t pid, std::string* path) const {
+    if (controller()->version() == 2) {
+        // all cgroup v2 attributes use the same process group hierarchy
+        *path = StringPrintf("%s/uid_%u/pid_%d/%s", controller()->path(), uid, pid,
+                             file_name().c_str());
+        return true;
+    }
+    return GetPathForTask(pid, path);
+}
+
 bool ProfileAttribute::GetPathForTask(int tid, std::string* path) const {
     std::string subgroup;
     if (!controller()->GetTaskGroup(tid, &subgroup)) {
