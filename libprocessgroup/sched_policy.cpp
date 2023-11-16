@@ -178,6 +178,8 @@ static int get_sched_policy_from_group(const std::string& group, SchedPolicy* po
         *policy = SP_TOP_APP;
     } else if (group == "restricted") {
         *policy = SP_RESTRICTED;
+    } else if (group == "audio-app") {
+        *policy = SP_AUDIO_APP;
     } else {
         errno = ERANGE;
         return -1;
