@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d617fc73_173e39d5",
+        "filename": "fs_mgr/fs_mgr_remount.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 33243
+      },
+      "writtenOn": "2023-12-05T16:11:12Z",
+      "side": 0,
+      "message": "Wouldn\u0027t it be better to use `\"orange\"` as defualt value? As it is possible to lock bootloader with LineageOS installed, theoretically user can accidently damage system when bootloader is locked leading to soft-bricked device\nWhat I suggest is to use the following check instead of completely removing it:\n```C++\n// If bootloader does not report us anything about verified boot state assume\n// it is unlocked\nif (android::base::GetProperty(\"ro.boot.verifiedbootstate\", \"orange\") !\u003d \"orange\") {\n        LOG(ERROR) \u003c\u003c \"Device must be bootloader unlocked\";\n        return EXIT_FAILURE;\n}```",
+      "range": {
+        "startLine": 633,
+        "startChar": 4,
+        "endLine": 636,
+        "endChar": 5
+      },
+      "revId": "b4fa8cc3ef5aa4fd785714f18a9b46190c9be8eb",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
