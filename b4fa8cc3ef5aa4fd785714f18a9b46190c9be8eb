@@ -70,6 +70,30 @@
       },
       "revId": "b4fa8cc3ef5aa4fd785714f18a9b46190c9be8eb",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d821b3b3_5e625835",
+        "filename": "fs_mgr/fs_mgr_remount.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 33243
+      },
+      "writtenOn": "2023-12-05T16:29:30Z",
+      "side": 0,
+      "message": "Oh, I see. Then removing it is the only way to give ability of remounting to all users 😊",
+      "parentUuid": "d561aa11_291e6ed7",
+      "range": {
+        "startLine": 633,
+        "startChar": 4,
+        "endLine": 636,
+        "endChar": 5
+      },
+      "revId": "b4fa8cc3ef5aa4fd785714f18a9b46190c9be8eb",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
