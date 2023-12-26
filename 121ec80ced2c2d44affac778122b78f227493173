@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee1d5a14_29aae6df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2023-12-26T18:07:04Z",
+      "side": 1,
+      "message": "Fixes the following errors on gts4lv:\n\nCould not acquire IImageManager: Invalid path\nFailed to allocate scratch on /data, fallback to use free space on super\nFailed to create scratch partition\nCould not allocate backing storage for overlays\nOverlayfs setup for /vendor/dsp failed, skipping",
+      "revId": "121ec80ced2c2d44affac778122b78f227493173",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
