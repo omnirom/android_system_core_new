@@ -16,6 +16,23 @@
       "message": "before: `androidboot.boot_devices\u003dpci0000:00/0000:00:02.6,pci0000:00/0000:00:02.7` ...\nafter: `androidboot.boot_devices\u003dany`",
       "revId": "aa4415575cfceef7919855ac23b18068de327e5e",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c91293da_f9ee6674",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 25732
+      },
+      "writtenOn": "2024-01-02T01:27:56Z",
+      "side": 1,
+      "message": "Send to AOSP for feedback",
+      "revId": "aa4415575cfceef7919855ac23b18068de327e5e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
