@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9448dc86_00519cc6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32245
+      },
+      "writtenOn": "2024-01-02T08:47:27Z",
+      "side": 1,
+      "message": "don\u0027t really sure if they\u0027ll care about such targets tbh..\n\nbut okay I\u0027ll try sending to AOSP when I get my VM target booting",
+      "revId": "48624294ec0d82e7913e4327ac4b98a9edd96465",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
