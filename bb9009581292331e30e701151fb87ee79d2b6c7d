@@ -16,6 +16,23 @@
       "message": "Fixes gapps zip on shiba failing due to read-only dm block devs.",
       "revId": "bb9009581292331e30e701151fb87ee79d2b6c7d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6141c42a_5ee63607",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2024-02-18T11:05:02Z",
+      "side": 1,
+      "message": "Superseds https://github.com/LineageOS/android_kernel_oneplus_sm8550/commit/e51790b9e3e6067b28ecfb23387b8208a1bb4780",
+      "revId": "bb9009581292331e30e701151fb87ee79d2b6c7d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
