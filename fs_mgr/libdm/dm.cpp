@@ -318,9 +318,11 @@ bool DeviceMapper::LoadTable(const std::string& name, const DmTable& table) {
     io->data_size = ioctl_buffer.size();
     io->data_start = sizeof(struct dm_ioctl);
     io->target_count = static_cast<uint32_t>(table.num_targets());
+#if !defined(__ANDROID_RECOVERY__) || !defined(__ANDROID_DEBUGGABLE__)
     if (table.readonly()) {
         io->flags |= DM_READONLY_FLAG;
     }
+#endif
     if (ioctl(fd_, DM_TABLE_LOAD, io)) {
         PLOG(ERROR) << "DM_TABLE_LOAD failed";
         return false;
