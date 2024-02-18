@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96f23347_a8467969",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 24418
+      },
+      "writtenOn": "2024-02-18T09:49:00Z",
+      "side": 1,
+      "message": "Fixes gapps zip on shiba failing due to read-only dm block devs.",
+      "revId": "bb9009581292331e30e701151fb87ee79d2b6c7d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
