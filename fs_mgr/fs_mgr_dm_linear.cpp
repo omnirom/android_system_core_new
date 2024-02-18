@@ -156,6 +156,11 @@ bool CreateLogicalPartitions(const LpMetadata& metadata, const std::string& supe
             .block_device = super_device,
             .metadata = &metadata,
     };
+
+#if defined(__ANDROID_RECOVERY__) && defined(ALLOW_ADBD_DISABLE_VERITY)
+    params.force_writable = true;
+#endif
+
     for (const auto& partition : metadata.partitions) {
         if (!partition.num_extents) {
             LINFO << "Skipping zero-length logical partition: " << GetPartitionName(partition);
