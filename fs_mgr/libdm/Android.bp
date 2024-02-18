@@ -46,6 +46,13 @@ cc_library_static {
             enabled: false,
         },
     },
+    product_variables: {
+        debuggable: {
+            cppflags: [
+                "-D__ANDROID_DEBUGGABLE__",
+            ],
+        },
+    },
     ramdisk_available: true,
     vendor_ramdisk_available: true,
 }
