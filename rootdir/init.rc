@@ -1272,9 +1272,8 @@ service ueventd /system/bin/ueventd
 service console /system/bin/sh
     class core
     console
-    disabled
-    user shell
-    group shell log readproc
+    user root
+    group root shell log readproc
     seclabel u:r:shell:s0
     setenv HOSTNAME console
     shutdown critical
@@ -1289,9 +1288,6 @@ on property:ro.debuggable=1
     chmod 0777 /data/misc/wmtrace
     # Give reads to anyone for the accessibility trace folder on debug builds.
     chmod 0775 /data/misc/a11ytrace
-
-on init && property:ro.debuggable=1
-    start console
 
 on userspace-reboot-requested
   # TODO(b/135984674): reset all necessary properties here.
