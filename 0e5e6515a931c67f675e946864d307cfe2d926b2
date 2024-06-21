@@ -16,6 +16,23 @@
       "message": "It\u0027s just needed for my recent commits, Flashing dynamic partitions OTA with super metadata present on device still works fine",
       "revId": "0e5e6515a931c67f675e946864d307cfe2d926b2",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19a223c5_1c8cc73e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32245
+      },
+      "writtenOn": "2024-06-21T09:17:19Z",
+      "side": 1,
+      "message": "I\u0027ve shipped it in my own builds for months, for either retrofit devices or native dynamic partitions devices, no problem has been found so far",
+      "revId": "0e5e6515a931c67f675e946864d307cfe2d926b2",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
