@@ -82,8 +82,6 @@
 #define TUNE2FS_BIN     "/system/bin/tune2fs"
 #define RESIZE2FS_BIN "/system/bin/resize2fs"
 
-#define FSCK_LOG_FILE   "/dev/fscklogs/log"
-
 #define ZRAM_CONF_DEV   "/sys/block/zram0/disksize"
 #define ZRAM_CONF_MCS   "/sys/block/zram0/max_comp_streams"
 #define ZRAM_BACK_DEV   "/sys/block/zram0/backing_dev"
@@ -132,16 +130,6 @@ enum FsStatFlags {
     FS_STAT_ENABLE_CASEFOLD_FAILED = 0x100000,
     FS_STAT_ENABLE_METADATA_CSUM_FAILED = 0x200000,
 };
-
-static void log_fs_stat(const std::string& blk_device, int fs_stat) {
-    std::string msg =
-            android::base::StringPrintf("\nfs_stat,%s,0x%x\n", blk_device.c_str(), fs_stat);
-    android::base::unique_fd fd(TEMP_FAILURE_RETRY(open(FSCK_LOG_FILE, O_WRONLY | O_CLOEXEC |
-                                                        O_APPEND | O_CREAT, 0664)));
-    if (fd == -1 || !android::base::WriteStringToFd(msg, fd)) {
-        LWARNING << __FUNCTION__ << "() cannot log " << msg;
-    }
-}
 
 static bool is_extfs(const std::string& fs_type) {
     return fs_type == "ext4" || fs_type == "ext3" || fs_type == "ext2";
@@ -243,10 +231,10 @@ static void check_fs(const std::string& blk_device, const std::string& fs_type,
             if (should_force_check(*fs_stat)) {
                 ret = logwrap_fork_execvp(ARRAY_SIZE(e2fsck_forced_argv), e2fsck_forced_argv,
                                           &status, false, LOG_KLOG | LOG_FILE, false,
-                                          FSCK_LOG_FILE);
+                                          nullptr);
             } else {
                 ret = logwrap_fork_execvp(ARRAY_SIZE(e2fsck_argv), e2fsck_argv, &status, false,
-                                          LOG_KLOG | LOG_FILE, false, FSCK_LOG_FILE);
+                                          LOG_KLOG | LOG_FILE, false, nullptr);
             }
 
             if (ret < 0) {
@@ -273,12 +261,12 @@ static void check_fs(const std::string& blk_device, const std::string& fs_type,
                       << realpath(blk_device);
                 ret = logwrap_fork_execvp(ARRAY_SIZE(f2fs_fsck_forced_argv), f2fs_fsck_forced_argv,
                                           &status, false, LOG_KLOG | LOG_FILE, false,
-                                          FSCK_LOG_FILE);
+                                          nullptr);
             } else {
                 LINFO << "Running " << F2FS_FSCK_BIN << " -a -c 10000 --debug-cache "
                       << realpath(blk_device);
                 ret = logwrap_fork_execvp(ARRAY_SIZE(f2fs_fsck_argv), f2fs_fsck_argv, &status,
-                                          false, LOG_KLOG | LOG_FILE, false, FSCK_LOG_FILE);
+                                          false, LOG_KLOG | LOG_FILE, false, nullptr);
             }
             if (ret < 0) {
                 /* No need to check for error in fork, we can't really handle it now */
@@ -999,7 +987,6 @@ static bool mount_with_alternatives(Fstab& fstab, int start_idx, int* end_idx, i
                 check_fs(fstab[i].blk_device, fstab[i].fs_type, fstab[i].mount_point, &fs_stat);
             }
         }
-        log_fs_stat(fstab[i].blk_device, fs_stat);
     }
 
     /* Adjust i for the case where it was still withing the recs[] */
@@ -1984,7 +1971,6 @@ int fs_mgr_do_mount(Fstab* fstab, const std::string& n_name, const std::string& 
         while (retry_count-- > 0) {
             if (!__mount(n_blk_device, mount_point, fstab_entry)) {
                 fs_stat &= ~FS_STAT_FULL_MOUNT_FAILED;
-                log_fs_stat(fstab_entry.blk_device, fs_stat);
                 return FS_MGR_DOMNT_SUCCESS;
             } else {
                 if (retry_count <= 0) break;  // run check_fs only once
@@ -1997,7 +1983,6 @@ int fs_mgr_do_mount(Fstab* fstab, const std::string& n_name, const std::string& 
                 check_fs(n_blk_device, fstab_entry.fs_type, mount_point, &fs_stat);
             }
         }
-        log_fs_stat(fstab_entry.blk_device, fs_stat);
     }
 
     // Reach here means the mount attempt fails.

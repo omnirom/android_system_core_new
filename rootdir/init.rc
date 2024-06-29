@@ -88,10 +88,6 @@ on early-init
     mkdir /dev/sys/fs 0755 system system
     mkdir /dev/sys/block 0755 system system
 
-    # Create location for fs_mgr to store abbreviated output from filesystem
-    # checker programs.
-    mkdir /dev/fscklogs 0770 root system
-
     # Create tmpfs for use by the shell user.
     mount tmpfs tmpfs /tmp
     restorecon /tmp
@@ -1065,10 +1061,6 @@ on post-fs-data
     # until it is confirmed that apps and vendor processes don't make
     # IOCTLs on ashmem fds any more.
     setprop sys.use_memfd false
-
-    # Set fscklog permission
-    chown root system /dev/fscklogs/log
-    chmod 0770 /dev/fscklogs/log
 
     # Enable FUSE by default
     setprop persist.sys.fuse true
