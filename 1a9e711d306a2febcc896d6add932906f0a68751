@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a48d9a5e_33822b39",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 28223
+      },
+      "writtenOn": "2024-06-29T18:50:10Z",
+      "side": 1,
+      "message": "Gets rid of ERROR: logwrapper: Cannot log to file /dev/fscklogs/log",
+      "revId": "1a9e711d306a2febcc896d6add932906f0a68751",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
