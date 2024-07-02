@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d4f4a59_a6d97b38",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2024-07-02T00:28:34Z",
+      "side": 1,
+      "message": "This is valid not only for that case, but for NX as well which supports both eMMC and sdcard boot - this greatly simplifies the process BL3 side.",
+      "revId": "3e6896577b15ad9d068c37e38eca63db98b8d1c0",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
